@@ -17,7 +17,8 @@ st.markdown("""
             opacity: 1;
         ">
     """, unsafe_allow_html=True)
-### CREATION OF 2 SEPARATE ROWS FOR LINKED & EMAIL ###
+
+### CREATION OF 2 SEPARATE COLUMNS FOR LINKED & EMAIL ###
 linkedin_icon_part, email_icon_part, filler_part = st.columns([2, 2, 14], gap="small")
 
 

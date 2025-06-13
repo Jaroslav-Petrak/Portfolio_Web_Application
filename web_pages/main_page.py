@@ -61,7 +61,69 @@ st.markdown("""
             }
             </style>
         """, unsafe_allow_html=True)
+if st.session_state.selected_section == "Overview":
+    ### OVERVIEW SECTION ###
+    main_content_overview_text_part, main_content_overview_picture_part = st.columns([11, 3], gap="small")
+    ### TEXT PART OF THE OVERVIEW SECTION ###
+    with main_content_overview_text_part:
+        st.title("Overview")
+        st.markdown("""
+                    <div style='color: white;'>
+                    Experienced Data Analyst with educational background in Data Science & Artificial Intelligence. I have worked on projects related to data analytics in HR & quality assurance with the use of SQL, Excel & Power BI. I have worked with ML models with the libraries such as TensorFlow, XGBoost, CatBoost, LightGBM, Scikit-Learn, Pandas & Numpy. I am familiar with ML model deployments in Azure Machine Learning. I have also worked with ETL tools such as Azure Data Factory & Pentaho related to Data Engineering.
+                    </div>
+                    """, unsafe_allow_html=True)
+    ### PICTURE PART OF THE OVERVIEW SECTION ###    
+    with main_content_overview_picture_part:
+        st.image("images/profile_overview_icon.png", width=200)
 
+    ### EDUCATION SECTION ###  
+    main_content_education_text_part, main_content_education_picture_part = st.columns([11, 3], gap="small")
+    ### PICTURE PART OF THE EDUCATION SECTION ###    
+    with main_content_education_text_part:
+        st.title("Education")
+        st.markdown("""
+                    <div style='color: white;'>
+                    • Czech Technical University in Prague (CTU) - Project Management of Innovations (Ing./MSc.)
+                    </div>
+                    """, unsafe_allow_html=True)
+        st.markdown("""
+                    <div style='color: white;'>
+                    • Open Institute of Technology (OPIT) - Applied Data Science & AI (MSc.)
+                    </div>
+                    """, unsafe_allow_html=True)
+        st.markdown("""
+                    <div style='color: white;'>
+                    • Czech Technical University in Prague (CTU) - Economics & Management (Bc./BSc.)
+                    </div>
+                    """, unsafe_allow_html=True)
+    
+    ### TEXT PART OF THE EDUCATION SECTION ###
+    with main_content_education_picture_part:
+        st.image("images/profile_education_icon.png", width=200)    
+    
+    ### LANGUAGES SECTION ###
+    main_content_languages_text_part, main_content_languages_picture_part = st.columns([11, 3], gap="small")
+    ### TEXT PART OF THE LANGUAGES SECTION ###
+    with main_content_languages_text_part:
+        st.title("Languages")
+        st.markdown("""
+                    <div style='color: white;'>
+                    • Czech - Native
+                    </div>
+                    """, unsafe_allow_html=True)
+        st.markdown("""
+                    <div style='color: white;'>
+                    • English - CAE C1 certified
+                    </div>
+                    """, unsafe_allow_html=True)
+        st.markdown("""
+                    <div style='color: white;'>
+                    • French - DELF B1 certified
+                    </div>
+                    """, unsafe_allow_html=True)
+    ### PICTURE PART OF THE LANGUAGES SECTION ###    
+    with main_content_languages_picture_part:
+        st.image("images/profile_languages_icon.png", width=200)
 if st.session_state.selected_section == "Experience":
     st.title("Experience")
     ### HR CONTROLLING DATA ANALYST SECTION ###
@@ -397,69 +459,7 @@ if st.session_state.selected_section == "Certifications & Courses":
     ### PICTURE PART OF THE COURSES SECTION ###    
     with main_content_courses_picture_part:
         st.image("images/profile_courses_icon.png", width=200)
-else:
-    ### OVERVIEW SECTION ###
-    main_content_overview_text_part, main_content_overview_picture_part = st.columns([11, 3], gap="small")
-    ### TEXT PART OF THE OVERVIEW SECTION ###
-    with main_content_overview_text_part:
-        st.title("Overview")
-        st.markdown("""
-                    <div style='color: white;'>
-                    Experienced Data Analyst with educational background in Data Science & Artificial Intelligence. I have worked on projects related to data analytics in HR & quality assurance with the use of SQL, Excel & Power BI. I have worked with ML models with the libraries such as TensorFlow, XGBoost, CatBoost, LightGBM, Scikit-Learn, Pandas & Numpy. I am familiar with ML model deployments in Azure Machine Learning. I have also worked with ETL tools such as Azure Data Factory & Pentaho related to Data Engineering.
-                    </div>
-                    """, unsafe_allow_html=True)
-    ### PICTURE PART OF THE OVERVIEW SECTION ###    
-    with main_content_overview_picture_part:
-        st.image("images/profile_overview_icon.png", width=200)
 
-    ### EDUCATION SECTION ###  
-    main_content_education_text_part, main_content_education_picture_part = st.columns([11, 3], gap="small")
-    ### PICTURE PART OF THE EDUCATION SECTION ###    
-    with main_content_education_text_part:
-        st.title("Education")
-        st.markdown("""
-                    <div style='color: white;'>
-                    • Czech Technical University in Prague (CTU) - Project Management of Innovations (Ing./MSc.)
-                    </div>
-                    """, unsafe_allow_html=True)
-        st.markdown("""
-                    <div style='color: white;'>
-                    • Open Institute of Technology (OPIT) - Applied Data Science & AI (MSc.)
-                    </div>
-                    """, unsafe_allow_html=True)
-        st.markdown("""
-                    <div style='color: white;'>
-                    • Czech Technical University in Prague (CTU) - Economics & Management (Bc./BSc.)
-                    </div>
-                    """, unsafe_allow_html=True)
-    
-    ### TEXT PART OF THE EDUCATION SECTION ###
-    with main_content_education_picture_part:
-        st.image("images/profile_education_icon.png", width=200)    
-    
-    ### LANGUAGES SECTION ###
-    main_content_languages_text_part, main_content_languages_picture_part = st.columns([11, 3], gap="small")
-    ### TEXT PART OF THE LANGUAGES SECTION ###
-    with main_content_languages_text_part:
-        st.title("Languages")
-        st.markdown("""
-                    <div style='color: white;'>
-                    • Czech - Native
-                    </div>
-                    """, unsafe_allow_html=True)
-        st.markdown("""
-                    <div style='color: white;'>
-                    • English - CAE C1 certified
-                    </div>
-                    """, unsafe_allow_html=True)
-        st.markdown("""
-                    <div style='color: white;'>
-                    • French - DELF B1 certified
-                    </div>
-                    """, unsafe_allow_html=True)
-    ### PICTURE PART OF THE LANGUAGES SECTION ###    
-    with main_content_languages_picture_part:
-        st.image("images/profile_languages_icon.png", width=200)
 
 
 

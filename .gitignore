@@ -1,2 +1,2 @@
-secrets.toml
 config/__pycache__
+config/config.py

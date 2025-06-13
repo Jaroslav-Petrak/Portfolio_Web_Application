@@ -35,11 +35,11 @@ st.markdown(f"""
 
 
 main_page = st.Page(page="web_pages/main_page.py", title="Main Page")
-salary_predictor_page = st.Page(page="web_pages/salary_predictor.py", title="Salary Predictor")
+salary_predictor = st.Page(page="web_pages/salary_predictor.py", title="Salary Predictor")
 
 pg = st.navigation({
     "NAVIGATION": [main_page],
-    "Portfolio Projects": [salary_predictor_page]
+    "Portfolio Projects": [salary_predictor]
 })
 
 pg.run()

@@ -61,7 +61,7 @@ st.markdown("""
             }
             </style>
         """, unsafe_allow_html=True)
-if st.session_state.selected_section == "Overview":
+if st.session_state.selected_section != "Experience" and st.session_state.selected_section != "Skills & Tools" and st.session_state.selected_section != "Certifications & Courses":
     ### OVERVIEW SECTION ###
     main_content_overview_text_part, main_content_overview_picture_part = st.columns([11, 3], gap="small")
     ### TEXT PART OF THE OVERVIEW SECTION ###
@@ -459,8 +459,6 @@ if st.session_state.selected_section == "Certifications & Courses":
     ### PICTURE PART OF THE COURSES SECTION ###    
     with main_content_courses_picture_part:
         st.image("images/profile_courses_icon.png", width=200)
-
-
 
 
 

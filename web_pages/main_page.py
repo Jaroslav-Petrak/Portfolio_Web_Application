@@ -6,7 +6,7 @@ st.markdown(config.config.title_fonts, unsafe_allow_html=True)
 
 profile_photo_part, title_part = st.columns([1, 7])
 with profile_photo_part:
-    st.image("images/profile_picture.png",width = 160)
+    st.image("images/profile_picture.png",width = 150)
 with title_part:
     st.markdown(f'<div class="title-font">JAROSLAV PETRÁK</div>', unsafe_allow_html=True)
     st.markdown('<div class="subtitle-font">Data Scientist & Analyst</div>', unsafe_allow_html=True)
@@ -63,7 +63,7 @@ st.markdown("""
         """, unsafe_allow_html=True)
 if st.session_state.selected_section != "Experience" and st.session_state.selected_section != "Skills & Tools" and st.session_state.selected_section != "Certifications & Courses":
     ### OVERVIEW SECTION ###
-    main_content_overview_text_part, main_content_overview_picture_part = st.columns([11, 3], gap="small")
+    main_content_overview_text_part, overview_filler_part ,main_content_overview_picture_part = st.columns([11,1,3], gap="small")
     ### TEXT PART OF THE OVERVIEW SECTION ###
     with main_content_overview_text_part:
         st.title("Overview")
@@ -77,7 +77,7 @@ if st.session_state.selected_section != "Experience" and st.session_state.select
         st.image("images/profile_overview_icon.png", width=200)
 
     ### EDUCATION SECTION ###  
-    main_content_education_text_part, main_content_education_picture_part = st.columns([11, 3], gap="small")
+    main_content_education_text_part, education_filler_part, main_content_education_picture_part = st.columns([11, 1, 3], gap="small")
     ### PICTURE PART OF THE EDUCATION SECTION ###    
     with main_content_education_text_part:
         st.title("Education")
@@ -102,7 +102,7 @@ if st.session_state.selected_section != "Experience" and st.session_state.select
         st.image("images/profile_education_icon.png", width=200)    
     
     ### LANGUAGES SECTION ###
-    main_content_languages_text_part, main_content_languages_picture_part = st.columns([11, 3], gap="small")
+    main_content_languages_text_part, languages_filler_part, main_content_languages_picture_part = st.columns([11, 1, 3], gap="small")
     ### TEXT PART OF THE LANGUAGES SECTION ###
     with main_content_languages_text_part:
         st.title("Languages")
@@ -127,7 +127,7 @@ if st.session_state.selected_section != "Experience" and st.session_state.select
 if st.session_state.selected_section == "Experience":
     st.title("Experience")
     ### HR CONTROLLING DATA ANALYST SECTION ###
-    main_content_position_1_text_part, main_content_position_1_picture_part = st.columns([11, 3], gap="small")
+    main_content_position_1_text_part, position_1_filler_part, main_content_position_1_picture_part = st.columns([11, 1, 3], gap="small")
     ### TEXT PART OF THE HR CONTROLLING DATA ANALYST SECTION ###
     with main_content_position_1_text_part:        
         st.markdown("""
@@ -166,7 +166,7 @@ if st.session_state.selected_section == "Experience":
         st.image("images/experience_cetin_logo.png", width=200)
 
     ### DATA ANALYST SUPPORT SECTION ###
-    main_content_position_2_text_part, main_content_position_2_picture_part = st.columns([11, 3], gap="small")
+    main_content_position_2_text_part, position_2_filler_part, main_content_position_2_picture_part = st.columns([11, 1, 3], gap="small")
     ### TEXT PART OF THE DATA ANALYST SUPPORT SECTION ###
     with main_content_position_2_text_part:        
         st.markdown("""
@@ -190,7 +190,7 @@ if st.session_state.selected_section == "Experience":
         st.image("images/experience_cetin_logo.png", width=200)
 
     ### HR TRAINEE SECTION ###
-    main_content_position_3_text_part, main_content_position_3_picture_part = st.columns([11, 3], gap="small")
+    main_content_position_3_text_part, position_3_filler_part, main_content_position_3_picture_part = st.columns([11, 1, 3], gap="small")
     ### TEXT PART OF THE HR TRAINEE SECTION ###
     with main_content_position_3_text_part:        
         st.markdown("""
@@ -214,7 +214,7 @@ if st.session_state.selected_section == "Experience":
         st.image("images/experience_adastra_logo.png", width=200)
 
     ### MARKETING TRAINEE SECTION ###
-    main_content_position_4_text_part, main_content_position_4_picture_part = st.columns([11, 3], gap="small")
+    main_content_position_4_text_part, position_4_filler_part, main_content_position_4_picture_part = st.columns([11, 1, 3], gap="small")
     ### TEXT PART OF THE MARKETING TRAINEE SECTION ###
     with main_content_position_4_text_part:        
         st.markdown("""
@@ -245,7 +245,7 @@ if st.session_state.selected_section == "Experience":
 if st.session_state.selected_section == "Skills & Tools":
 
     ### SKILLS SECTION ###
-    main_content_skills_text_part, main_content_skills_picture_part = st.columns([11, 3], gap="small")
+    main_content_skills_text_part, skills_filler_part, main_content_skills_picture_part = st.columns([11, 1, 3], gap="small")
     ### TEXT PART OF THE SKILLS SECTION ###
     with main_content_skills_text_part:
         st.title("Skills")
@@ -279,7 +279,7 @@ if st.session_state.selected_section == "Skills & Tools":
         st.image("images/profile_skills_icon.png", width=200)
 
     ### PROGRAMMING LANGUAGES SECTION ###
-    main_content_programming_languages_text_part, main_content_programming_languages_picture_part = st.columns([11, 3], gap="small")
+    main_content_programming_languages_text_part, programming_languages_filler_part, main_content_programming_languages_picture_part = st.columns([11, 1, 3], gap="small")
     ### TEXT PART OF THE PROGRAMMING LANGUAGES SECTION ###
     with main_content_programming_languages_text_part:
         st.title("Programming Languages")
@@ -308,7 +308,7 @@ if st.session_state.selected_section == "Skills & Tools":
         st.image("images/profile_programming_languages_icon.png", width=200)
 
     ### TOOLS SECTION ###
-    main_content_tools_text_part, main_content_tools_picture_part = st.columns([11, 3], gap="small")
+    main_content_tools_text_part, tools_filler_part, main_content_tools_picture_part = st.columns([11, 1, 3], gap="small")
     ### TEXT PART OF THE TOOLS SECTION ###
     with main_content_tools_text_part:
         st.title("Tools")
@@ -368,7 +368,7 @@ if st.session_state.selected_section == "Skills & Tools":
 
 if st.session_state.selected_section == "Certifications & Courses":
     ### CERTIFICATIONS SECTION ###
-    main_content_certifications_text_part, main_content_certifications_picture_part = st.columns([11, 3], gap="small")
+    main_content_certifications_text_part, certifications_filler_part, main_content_certifications_picture_part = st.columns([11, 1, 3], gap="small")
     ### TEXT PART OF THE COURSES SECTION ###
     with main_content_certifications_text_part:
         st.title("Certifications")
@@ -392,7 +392,7 @@ if st.session_state.selected_section == "Certifications & Courses":
         st.image("images/profile_certifications_icon.png", width=200)
 
     ### COURSES SECTION ###
-    main_content_courses_text_part, main_content_courses_picture_part = st.columns([11, 3], gap="small")
+    main_content_courses_text_part, courses_filler_part, main_content_courses_picture_part = st.columns([11, 1, 3], gap="small")
     ### TEXT PART OF THE COURSES SECTION ###
     with main_content_courses_text_part:
         st.title("Courses")

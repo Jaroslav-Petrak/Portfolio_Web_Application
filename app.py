@@ -10,12 +10,23 @@ st.markdown(f"""
         color: {config.config.primary_font_color} !important;
     }}
 
+    /* Navigation sidebar background color */
     section[data-testid="stSidebar"] {{
-        background-color: {config.config.navigation_background_color} !important;
+        background-color: #2C3E50 !important;  /* <-- Change this to your desired nav background color */
     }}
 
+    /* Navigation sidebar font color */
     section[data-testid="stSidebar"] * {{
-        color: {config.config.navigation_font_color} !important;
+        color: #F1F1F1 !important;  /* <-- Change this to your desired nav font color */
+    }}
+
+    /* Sidebar links hover effect */
+    section[data-testid="stSidebar"] a:hover {{
+        background-color: #1f1f1f !important;
+        transition: all 0.3s ease;
+        border-radius: 5px;
+        padding: 5px 10px;
+        text-decoration: none;
     }}
 
     header[data-testid="stHeader"] {{
@@ -29,28 +40,17 @@ st.markdown(f"""
     footer {{
         visibility: hidden;
     }}
-    </style>
-""", unsafe_allow_html=True)
-
-### WHITE FONT OF TEXT IN NAVIGATION PANEL###
-st.markdown("""
-    <style>
-    section[data-testid="stSidebar"] * {
-        color: white !important;
-    }
-
 
     </style>
 """, unsafe_allow_html=True)
 
-
-main_page_overview = st.Page(page="web_pages/main_page_overview.py", title="Main Page")
-salary_predictor_page_predictor = st.Page(page="web_pages/salary_predictor_page_predictor.py", title="Salary Predictor")
+main_page = st.Page(page="web_pages/main_page.py", title="Main Page")
+salary_predictor = st.Page(page="web_pages/salary_predictor.py", title="Salary Predictor")
 contact = st.Page(page="web_pages/contact.py", title="Contact")
 
 pg = st.navigation({
-    "NAVIGATION": [main_page_overview, contact],
-    "Portfolio Projects": [salary_predictor_page_predictor]
+    "NAVIGATION": [main_page, contact],
+    "Portfolio Projects": [salary_predictor]
 })
 
 pg.run()

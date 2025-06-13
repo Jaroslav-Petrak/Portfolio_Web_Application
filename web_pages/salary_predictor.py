@@ -39,6 +39,8 @@ with col1:
 with col2:
     st.button("Description", key="btn_description", on_click=set_section, args=("Description",))
 
+set_section = "Prediction" #default
+
 st.markdown("""
     <style>
     div[data-testid="stButton"] > button {
@@ -66,7 +68,16 @@ st.markdown("""
 
 
 ### PREDICTOR SECTION ###
-if st.session_state.selected_section == "Predictor":
+if st.session_state.selected_section == "Description":
+    ### DESCRIPTION SECTION ###
+    st.title("Description of the Project")
+    st.markdown("""
+                <div style='color: white;'>
+                Predictor has been stemmed based on H-1B visa salary data in the USA. Positions with equivalent job titles have been collected in order to make a representative picture of the salaries. Model has been deployed as an endpoint on Azure Machine Learning. This project is part of the diploma thesis related to the degree of MSc. Applied Data Science & AI with the name Development of a Salary Predictor for Fair Compensation which covers the preprocessing of the data, model development, validation & deployment. Choose the company, job title, branch, location, submission date of the documents related to the work-related visa as well as starting date on the position & make a prediction of expected salary. Last update of the model has been done in May 2025.
+                </div>
+                """, unsafe_allow_html=True)
+    
+else:
     st.title("Predictor")
     ### DATA FOR THE SEARCH BARS ###
     df = pd.read_csv("data/source_for_search_bars.csv")
@@ -224,16 +235,6 @@ if st.session_state.selected_section == "Predictor":
                 """,
                 unsafe_allow_html=True
             )
-
-
-else:
-    ### DESCRIPTION SECTION ###
-    st.title("Description of the Project")
-    st.markdown("""
-                <div style='color: white;'>
-                Predictor has been stemmed based on H-1B visa salary data in the USA. Positions with equivalent job titles have been collected in order to make a representative picture of the salaries. Model has been deployed as an endpoint on Azure Machine Learning. This project is part of the diploma thesis related to the degree of MSc. Applied Data Science & AI with the name Development of a Salary Predictor for Fair Compensation which covers the preprocessing of the data, model development, validation & deployment. Choose the company, job title, branch, location, submission date of the documents related to the work-related visa as well as starting date on the position & make a prediction of expected salary. Last update of the model has been done in May 2025.
-                </div>
-                """, unsafe_allow_html=True)
 
 
 

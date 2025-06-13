@@ -5,7 +5,7 @@ import config.config
 st.markdown(config.config.title_fonts, unsafe_allow_html=True)
 
 ### DIVIDING MAIN PAGE & RIGHT SIDEBAR ###
-content_part, sidebar_part = st.columns([4, 1])  # 4:1 width ratio
+content_part, sidebar_part = st.columns([4, 1])
 
 ### MAIN CONTENT PART ###
 with content_part:

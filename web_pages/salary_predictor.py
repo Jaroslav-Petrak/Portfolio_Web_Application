@@ -19,3 +19,20 @@ st.markdown("""
         ">
     """, unsafe_allow_html=True)
 
+company_part, position_part, location_part, submission_date_part, starting_date_part = st.columns([1, 1, 1, 1, 1])
+
+with company_part:
+    st.title("Company")
+
+with position_part:
+    st.title("Position")
+
+with location_part:
+    st.title("Location")
+
+with submission_date_part:
+    st.title("Submission Date")
+
+with starting_date_part:
+    st.title("Starting Date")
+

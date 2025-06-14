@@ -17,12 +17,12 @@ st.markdown("""
                         </style>
                     """, unsafe_allow_html=True)
 
-profile_photo_part, title_part = st.columns([1.3, 7])
-with profile_photo_part:
-    st.image("images/profile_picture.png",width = 150)
+title_part, profile_photo_part = st.columns([7, 1.3])
 with title_part:
     st.markdown(f'<div class="title-font">JAROSLAV PETRÁK</div>', unsafe_allow_html=True)
     st.markdown('<div class="subtitle-font">Data Scientist & Analyst</div>', unsafe_allow_html=True)
+with profile_photo_part:
+    st.image("images/profile_picture.png",width = 150)
 
 st.markdown("""
     <hr style="

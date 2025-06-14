@@ -19,26 +19,9 @@ st.markdown("""
 
 
 
-profile_photo_part, divider_part, title_section_filler_part_1, title_part, title_section_filler_part_2 = st.columns([1.1, 0.1, 0.1, 4, 3])
 
-with profile_photo_part:
-    st.image("images/profile_picture.png", width=150)
-
-with divider_part:
-    st.markdown(
-        """
-        <div style="
-            height: 150px;
-            border-left: 4px solid white;
-            margin: 0 auto;
-        "></div>
-        """,
-        unsafe_allow_html=True
-    )
-
-with title_part:
-    st.markdown(f'<div class="title-font">JAROSLAV PETRÁK</div>', unsafe_allow_html=True)
-    st.markdown('<div class="subtitle-font">Data Scientist & Analyst</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="title-font">JAROSLAV PETRÁK</div>', unsafe_allow_html=True)
+st.markdown('<div class="subtitle-font">Data Scientist & Analyst</div>', unsafe_allow_html=True)
 
 
 st.markdown("""
@@ -104,7 +87,7 @@ if st.session_state.selected_section != "Experience" and st.session_state.select
                     """, unsafe_allow_html=True)
     ### PICTURE PART OF THE OVERVIEW SECTION ###    
     with main_content_overview_picture_part:
-        st.image("images/profile_overview_icon.png", width=200)
+            st.image("images/profile_picture.png", width=200, use_container_width = False)
 
     ### EDUCATION SECTION ###  
     main_content_education_text_part, education_filler_part, main_content_education_picture_part = st.columns([11, 1, 3], gap="small")
@@ -113,7 +96,7 @@ if st.session_state.selected_section != "Experience" and st.session_state.select
         st.title("Education")
         st.markdown("""
                     <div style='color: white;'>
-                    • <a href="https://www.muvs.cvut.cz/en/prospective-students/master-of-science/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">Czech Technical University in Prague (CTU)</a> - Project Management of Innovations (Ing./MSc.) - Current average 1.3 (A grade)
+                    • <a href="https://www.muvs.cvut.cz/en/prospective-students/master-of-science/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">Czech Technical University in Prague (CTU)</a> - Project Management of Innovations (Ing./MSc.) - Current average A
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
@@ -123,7 +106,7 @@ if st.session_state.selected_section != "Experience" and st.session_state.select
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • <a href="https://www.muvs.cvut.cz/en/prospective-students/prospective-bachelor/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">Czech Technical University in Prague (CTU)</a> - Economics & Management (Bc./BSc.) - Graduated with distinction with total average of 1.06 (nearly perfect A grade)
+                    • <a href="https://www.muvs.cvut.cz/en/prospective-students/prospective-bachelor/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">Czech Technical University in Prague (CTU)</a> - Economics & Management (Bc./BSc.) - Graduated with distinction
                     </div>
                     """, unsafe_allow_html=True)
     

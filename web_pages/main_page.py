@@ -17,7 +17,7 @@ st.markdown("""
                         </style>
                     """, unsafe_allow_html=True)
 
-profile_photo_part, title_part = st.columns([1, 7])
+profile_photo_part, title_part = st.columns([1.3, 7])
 with profile_photo_part:
     st.image("images/profile_picture.png",width = 150)
 with title_part:

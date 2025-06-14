@@ -256,7 +256,7 @@ if st.session_state.selected_section == "Experience":
                     """, unsafe_allow_html=True)   
         st.markdown("""
                     <div style='color: white;'>
-                    • Editation of HTML codes for the modification of email marketing content
+                    • Editing of HTML codes for the modification of email marketing content
                     </div>
                     """, unsafe_allow_html=True)   
     ### PICTURE PART OF THE MARKETING TRAINEE SECTION ###    

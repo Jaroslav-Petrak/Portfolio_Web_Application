@@ -7,6 +7,8 @@ from azureml.core.webservice import Webservice
 from azureml.core import Workspace
 import streamlit.components.v1 as components
 import traceback
+import requests
+
 
 
 ### CONFIGURATION OF THE TITLE FONTS ###
@@ -220,26 +222,14 @@ if st.session_state.selected_section != "Description" and st.session_state.selec
                 )
 
             try:
-                update_logs("Loading secrets...")
-                subscription_id = st.secrets["subscription_id"]
-                resource_group = st.secrets["resource_group"]
-                workspace_name = st.secrets["workspace_name"]
-                web_service_name = st.secrets["web_service_name"]
-                model_name = st.secrets["model_name"]
-
-                update_logs("Connecting to Azure ML...")
-                workspace = Workspace.get(name=workspace_name,
-                                        subscription_id=subscription_id,
-                                        resource_group=resource_group)
-                update_logs("Workspace connected.")
-
-                update_logs("Getting ML model's endpoint...")
-                endpoint = Webservice(workspace=workspace, name=web_service_name)
-                update_logs("ML model's endpoint obtained.")
-
+                update_logs("Getting to the endpoint of the ML Model...")
+                scoring_uri = st.secrets["scoring_uri"]
                 update_logs("Sending data for prediction...")
-                raw_prediction = endpoint.run(input_data=edited_input_data)
-                parsed_json_prediction = json.loads(raw_prediction)
+                headers = {"Content-Type": "application/json"}
+                response = requests.post(scoring_uri, data=edited_input_data, headers=headers)
+                response.raise_for_status()
+                parsed_json_prediction = json.loads(response.text) 
+                parsed_json_prediction = json.loads(parsed_json_prediction) 
                 prediction_value = parsed_json_prediction["result"][0][0]
                 clean_prediction = int(prediction_value)
                 update_logs("Prediction calculated successfully.")

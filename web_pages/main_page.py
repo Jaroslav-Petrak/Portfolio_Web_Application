@@ -19,7 +19,7 @@ st.markdown("""
 
 
 
-profile_photo_part, divider_part, title_section_filler_part, title_part = st.columns([1.1, 0.1, 0.1, 7])
+profile_photo_part, divider_part, title_section_filler_part_1, title_part, title_section_filler_part_2 = st.columns([1.1, 0.1, 0.1, 4, 3])
 
 with profile_photo_part:
     st.image("images/profile_picture.png", width=150)

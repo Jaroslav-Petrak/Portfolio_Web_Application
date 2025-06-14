@@ -6,6 +6,7 @@ import json
 from azureml.core.webservice import Webservice
 from azureml.core import Workspace
 import streamlit.components.v1 as components
+import traceback
 
 
 ### CONFIGURATION OF THE TITLE FONTS ###
@@ -165,81 +166,110 @@ if st.session_state.selected_section != "Description" and st.session_state.selec
 
     if clicked:
         with st.spinner("Processing..."):
-                time.sleep(2)
+            time.sleep(1)
+
         if selected_value_company == "" or selected_value_job_title == "" or selected_value_location == "" or selected_value_branch == "":
-            st.markdown("""
-            <div style="background-color:#e04e4e; color: white; padding: 10px 20px; border-radius: 5px; text-align: center;">
-                Choose at least one value in every parameter (company, job title, branch & location)!
-            </div>
-            """, unsafe_allow_html=True)
-        elif selected_submission_date > selected_start_date:
-            st.markdown("""
-            <div style="background-color:#e04e4e; color: white; padding: 10px 20px; border-radius: 5px; text-align: center;">
-                Choose submission day which is on the same day or prior to the start date!
-            </div>
-            """, unsafe_allow_html=True)
-        else:
-            st.markdown("""
-            <div style="background-color:#2ecc71; color: white; padding: 10px 20px; border-radius: 5px; text-align: center;">
-                Success! Wait for the prediction to appear below.
-            </div>
-            """, unsafe_allow_html=True)
-            
-            data_from_user_input = {
-                    "EMPLOYER": selected_value_company,
-                    "JOB TITLE": selected_value_job_title,
-                    "LOCATION": selected_value_location,
-                    "SUBMIT DATE": selected_submission_date.strftime("%#m/%#d/%Y"),
-                    "START DATE": selected_start_date.strftime("%#m/%#d/%Y"),
-                    "BRANCH": selected_value_branch,
-                    }
-            edited_input_data = json.dumps([data_from_user_input], indent=2)
-            
-            subscription_id = st.secrets["subscription_id"]
-            resource_group = st.secrets["resource_group"]
-            workspace_name = st.secrets["workspace_name"]
-            web_service_name = st.secrets["web_service_name"]
-            model_name = st.secrets["model_name"]
-            workspace = Workspace.get(name=workspace_name,
-                                    subscription_id=subscription_id,
-                                    resource_group=resource_group)
-
-            endpoint = Webservice(workspace=workspace, name=web_service_name)
-            raw_prediction = endpoint.run(input_data=edited_input_data)
-            parsed_json_prediction = json.loads(raw_prediction)
-            prediction_value = parsed_json_prediction["result"][0][0]
-            clean_prediction = int(prediction_value)
-
-            st.text("")
-            st.markdown("""
-                        <hr style="
-                            border: none;
-                            height: 4px;
-                            background-color: white;
-                            margin: 10px 0;
-                            box-shadow: none;
-                            opacity: 1;
-                        ">
-                        """, unsafe_allow_html=True)
-            st.text("")
             st.markdown(
-                f"""
-                <div style="display: flex; justify-content: center;">
-                    <div style="background-color: #000000; padding: 30px; border-radius: 16px; width: 600px; color: white;">
-                        <h2 style='text-align: center; margin-bottom: 20px;'>Result</h2>
-                        <div style="display: flex; font-size: 24px; font-weight: bold; border-radius: 12px; overflow: hidden; box-shadow: 0 0 10px rgba(0,0,0,0.4); height: 80px;">
-                            <div style="flex: 1; background-color: #ff5c5c; color: white; display: flex; align-items: center; justify-content: center;">
-                                Predicted Salary
-                            </div>
-                            <div style="flex: 1; background-color: white; color: black; display: flex; align-items: center; justify-content: center;">
-                                {clean_prediction} USD
+                    """
+                    <div style='margin-top: 30px; display: flex; justify-content: center;'>
+                        <pre style='color: white; background-color: transparent; font-family: monospace; text-align: left; white-space: pre-wrap;'>
+                        Choose at least one value in every parameter (company, job title, branch & location)!
+                        </pre>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+            
+
+        elif selected_submission_date > selected_start_date:
+            st.markdown(
+                    """
+                    <div style='margin-top: 30px; display: flex; justify-content: center;'>
+                        <pre style='color: white; background-color: transparent; font-family: monospace; text-align: left; white-space: pre-wrap;'>
+                        Choose submission day which is on the same day or prior to the start date!
+                        </pre>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+
+
+        else:
+            data_from_user_input = {
+                "EMPLOYER": selected_value_company,
+                "JOB TITLE": selected_value_job_title,
+                "LOCATION": selected_value_location,
+                "SUBMIT DATE": selected_submission_date.strftime("%#m/%#d/%Y"),
+                "START DATE": selected_start_date.strftime("%#m/%#d/%Y"),
+                "BRANCH": selected_value_branch,
+            }
+            edited_input_data = json.dumps([data_from_user_input], indent=2)
+
+            log_placeholder = st.empty()
+
+            def update_logs(new_message):
+                log_placeholder.markdown(
+                    f"""
+                    <div style='margin-top: 30px; display: flex; justify-content: center;'>
+                        <pre style='color: white; background-color: transparent; font-family: monospace; text-align: left; white-space: pre-wrap;'>
+                        {new_message}
+                        </pre>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+
+            try:
+                update_logs("Loading secrets...")
+                subscription_id = st.secrets["subscription_id"]
+                resource_group = st.secrets["resource_group"]
+                workspace_name = st.secrets["workspace_name"]
+                web_service_name = st.secrets["web_service_name"]
+                model_name = st.secrets["model_name"]
+
+                update_logs("Connecting to Azure ML...")
+                workspace = Workspace.get(name=workspace_name,
+                                        subscription_id=subscription_id,
+                                        resource_group=resource_group)
+                update_logs("Workspace connected.")
+
+                update_logs("Getting ML model's endpoint...")
+                endpoint = Webservice(workspace=workspace, name=web_service_name)
+                update_logs("ML model's endpoint obtained.")
+
+                update_logs("Sending data for prediction...")
+                raw_prediction = endpoint.run(input_data=edited_input_data)
+                parsed_json_prediction = json.loads(raw_prediction)
+                prediction_value = parsed_json_prediction["result"][0][0]
+                clean_prediction = int(prediction_value)
+                update_logs("Prediction calculated successfully.")
+
+                st.text("")
+                st.text("")
+
+                st.markdown(
+                    f"""
+                    <div style="display: flex; justify-content: center;">
+                        <div style="background-color: #000000; padding: 30px; border-radius: 16px; width: 600px; color: white;">
+                            <h2 style='text-align: center; margin-bottom: 20px;'>Result</h2>
+                            <div style="display: flex; font-size: 24px; font-weight: bold; border-radius: 12px; overflow: hidden; box-shadow: 0 0 10px rgba(0,0,0,0.4); height: 80px;">
+                                <div style="flex: 1; background-color: #ff5c5c; color: white; display: flex; align-items: center; justify-content: center;">
+                                    Predicted Salary
+                                </div>
+                                <div style="flex: 1; background-color: white; color: black; display: flex; align-items: center; justify-content: center;">
+                                    {clean_prediction} USD
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
+                    """,
+                    unsafe_allow_html=True
+                )
+
+            except Exception:
+                update_logs("An error occurred during prediction.")
+                update_logs(traceback.format_exc())
+
 ### H-1B SALARIES DASHBOARD SECTION ###
 if st.session_state.selected_section == "H-1B Salaries Report":
     dashboard_url = "https://lookerstudio.google.com/embed/reporting/263493b9-9aea-45df-85a8-e7e6a431bc72/page/tz6NF"

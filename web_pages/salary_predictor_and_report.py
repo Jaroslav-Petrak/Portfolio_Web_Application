@@ -3,8 +3,6 @@ import pandas as pd
 import datetime
 import time
 import json
-from azureml.core.webservice import Webservice
-from azureml.core import Workspace
 import streamlit.components.v1 as components
 import traceback
 import requests

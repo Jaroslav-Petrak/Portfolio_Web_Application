@@ -1,8 +1,21 @@
 import streamlit as st
-import config.config
 
 ### CONFIGURATION OF THE TITLE FONTS ###
-st.markdown(config.config.title_fonts, unsafe_allow_html=True)
+st.markdown("""
+                        <style>
+                        .title-font {
+                            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                            font-size: 48px;
+                            font-weight: bold;
+                            color: #ffffff;
+                        }
+                        .subtitle-font {
+                            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                            font-size: 48px;
+                            color: #f88181;
+                        }
+                        </style>
+                    """, unsafe_allow_html=True)
 
 profile_photo_part, title_part = st.columns([1, 7])
 with profile_photo_part:
@@ -69,7 +82,7 @@ if st.session_state.selected_section != "Experience" and st.session_state.select
         st.title("Overview")
         st.markdown("""
                     <div style='color: white;'>
-                    Experienced Data Analyst with educational background in Data Science & Artificial Intelligence. I have worked on projects related to data analytics in HR & quality assurance with the use of SQL, Excel & Power BI. I have worked with ML models with the libraries such as TensorFlow, XGBoost, CatBoost, LightGBM, Scikit-Learn, Pandas & Numpy. I am familiar with ML model deployments in Azure Machine Learning. I have also worked with ETL tools such as Azure Data Factory & Pentaho related to Data Engineering.
+                    Experienced Data Analyst with an educational background in Data Science & AI. Skilled in leveraging SQL, Excel & Power BI to drive insightful data analytics projects, particularly in HR & quality assurance domains. Proficient in developing & deploying machine learning models using popular libraries such as TensorFlow, XGBoost, CatBoost, LightGBM & Scikit-Learn. Experienced in deploying ML models on Azure Machine Learning & adept at data engineering tasks utilizing ETL tools like Azure Data Factory & Pentaho.
                     </div>
                     """, unsafe_allow_html=True)
     ### PICTURE PART OF THE OVERVIEW SECTION ###    
@@ -83,17 +96,17 @@ if st.session_state.selected_section != "Experience" and st.session_state.select
         st.title("Education")
         st.markdown("""
                     <div style='color: white;'>
-                    • Czech Technical University in Prague (CTU) - Project Management of Innovations (Ing./MSc.)
+                    • <a href="https://www.muvs.cvut.cz/en/prospective-students/master-of-science/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">Czech Technical University in Prague (CTU)</a> - Project Management of Innovations (Ing./MSc.) - Current average 1.3 (A grade)
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • Open Institute of Technology (OPIT) - Applied Data Science & AI (MSc.)
+                    • <a href="https://www.opit.com/courses/computer-science-master/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">Open Institute of Technology (OPIT)</a> - Applied Data Science & AI (MSc.) - Total average 99%
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • Czech Technical University in Prague (CTU) - Economics & Management (Bc./BSc.)
+                    • <a href="https://www.muvs.cvut.cz/en/prospective-students/prospective-bachelor/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">Czech Technical University in Prague (CTU)</a> - Economics & Management (Bc./BSc.) - Graduated with distinction with total average of 1.06 (nearly perfect A grade)
                     </div>
                     """, unsafe_allow_html=True)
     
@@ -108,17 +121,17 @@ if st.session_state.selected_section != "Experience" and st.session_state.select
         st.title("Languages")
         st.markdown("""
                     <div style='color: white;'>
-                    • Czech - Native
+                    • <span style="text-decoration: none; color: #ff5757; font-weight: bold;">Czech</span> - Native
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • English - CAE C1 certified
+                    • <a href="https://www.linkedin.com/in/bc-jaroslav-petr%C3%A1k-7b9704264/details/certifications/1749917664315/single-media-viewer/?profileId=ACoAAEDjc30BZnSbgPlhIyAibehQFfGOTLWfijI" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">English</a> - CAE C1 certified
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • French - DELF B1 certified
+                    • <a href="https://www.linkedin.com/in/bc-jaroslav-petr%C3%A1k-7b9704264/details/certifications/1749919080218/single-media-viewer/?profileId=ACoAAEDjc30BZnSbgPlhIyAibehQFfGOTLWfijI" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">French</a> - DELF B1 certified
                     </div>
                     """, unsafe_allow_html=True)
     ### PICTURE PART OF THE LANGUAGES SECTION ###    
@@ -132,110 +145,118 @@ if st.session_state.selected_section == "Experience":
     with main_content_position_1_text_part:        
         st.markdown("""
                     <div style='color: white; font-size: 20px; font-weight: bold;'>
-                        HR Controlling Data Analyst – CETIN (2024/04 – Now)
+                        HR Controlling Data Analyst – <a href="https://www.cetin.cz/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">CETIN</a> (2024/04 – Now)
                     </div>
                     """, unsafe_allow_html=True)
 
         st.markdown("""
                     <div style='color: white;'>
-                    • Creation of reports about training & remuneration
+                    • Development of data-driven reporting on training compliance, remuneration, benefits, equality, diversity & other HR metrics, achieving near-perfect legislative compliance, optimizing & prioritizing high-demand benefits, improving gender inclusivity for women by 6%
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • ML forecasting HR metrics for planning purposes
+                    • ML forecasting of HR cost metrics for planning purposes, resulting in 5% MAPE while forecasting of the training costs
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • Excel & Power BI training of employees
+                    • Creation of online Power BI course & led 8 Excel training sessions, enhancing internal analytical capabilities & reducing dependency on external data support of roughly 90 employees
                     </div>
                     """, unsafe_allow_html=True)    
         st.markdown("""
                     <div style='color: white;'>
-                    • Power Apps development for the benefit selection
+                    • Development of 2 Power Apps to streamline the employee benefits selection process, enabling 3,000 employees to make their selections efficiently
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • Administration of SAP SuccessFactors & internal LMS
+                    • Serving as system administrator for SAP SuccessFactors and the internal LMS, including development of customized reports within both platforms
                     </div>
                     """, unsafe_allow_html=True)          
     ### PICTURE PART OF THE HR CONTROLLING DATA ANALYST SECTION ###    
     with main_content_position_1_picture_part:
         st.image("images/experience_cetin_logo.png", width=200)
 
+    st.text("")
     ### DATA ANALYST SUPPORT SECTION ###
     main_content_position_2_text_part, position_2_filler_part, main_content_position_2_picture_part = st.columns([11, 1, 3], gap="small")
     ### TEXT PART OF THE DATA ANALYST SUPPORT SECTION ###
     with main_content_position_2_text_part:        
         st.markdown("""
                     <div style='color: white; font-size: 20px; font-weight: bold;'>
-                        Data Analyst Support – CETIN (2023/06 – 2024/04)
+                        Data Analyst Support – <a href="https://www.cetin.cz/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">CETIN</a> (2023/06 – 2024/04)
                     </div>
                     """, unsafe_allow_html=True)
 
         st.markdown("""
                     <div style='color: white;'>
-                    • Creation of reports about service quality assurance
+                    • Reporting about service quality assurance, contributing to maintaining lead times below thresholds specified in B2B contracts, resulting in performance 2-5% above the threshold on average
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • Monitoring projects related to report & data migrations
+                    • Monitoring projects related to 7 report migrations, 1 data migration
+                    </div>
+                    """, unsafe_allow_html=True)   
+        st.markdown("""
+                    <div style='color: white;'>
+                    • Communication of feature engineering needs to the Data Engineers, ensuring swift delivery of necessary variables for reporting
                     </div>
                     """, unsafe_allow_html=True)   
     ### PICTURE PART OF THE DATA ANALYST SUPPORT SECTION ###    
     with main_content_position_2_picture_part:
         st.image("images/experience_cetin_logo.png", width=200)
 
+    st.text("")
     ### HR TRAINEE SECTION ###
     main_content_position_3_text_part, position_3_filler_part, main_content_position_3_picture_part = st.columns([11, 1, 3], gap="small")
     ### TEXT PART OF THE HR TRAINEE SECTION ###
     with main_content_position_3_text_part:        
         st.markdown("""
                     <div style='color: white; font-size: 20px; font-weight: bold;'>
-                        HR Trainee – Adastra (2023/03 – 2023/04)
+                        HR Trainee – <a href="https://adastracorp.com/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">Adastra</a> (2023/03 – 2023/04)
                     </div>
                     """, unsafe_allow_html=True)
 
         st.markdown("""
                     <div style='color: white;'>
-                    • IT recruitment (data analytics & project management)
+                    • IT recruitment related to Data Analytics & IT Project Management, handling a total of 75 telephone screenings & 3 in-person interviews
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • Translation of directives from Czech to English
+                    • Translation of a total of 7 company-internal directives from Czech to English
                     </div>
                     """, unsafe_allow_html=True)   
     ### PICTURE PART OF THE HR TRAINEE SECTION ###    
     with main_content_position_3_picture_part:
         st.image("images/experience_adastra_logo.png", width=200)
 
+    st.text("")
     ### MARKETING TRAINEE SECTION ###
     main_content_position_4_text_part, position_4_filler_part, main_content_position_4_picture_part = st.columns([11, 1, 3], gap="small")
     ### TEXT PART OF THE MARKETING TRAINEE SECTION ###
     with main_content_position_4_text_part:        
         st.markdown("""
                     <div style='color: white; font-size: 20px; font-weight: bold;'>
-                        Marketing Trainee – CPI Hotels (2022/09 – 2022/12)
+                        Marketing Trainee – <a href="https://www.cpihotels.com/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">CPI Hotels</a> (2022/09 – 2022/12)
                     </div>
                     """, unsafe_allow_html=True)
 
         st.markdown("""
                     <div style='color: white;'>
-                    • Analysis of competition
+                    • Analysis of competitors, deriving insights about prices, quality, events, services from more than 20 local hotel providers
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • Work with internal database of vouchers
+                    • Tracking voucher status in the database to estimate expected costs from active vouchers & savings from expired ones 
                     </div>
                     """, unsafe_allow_html=True)   
         st.markdown("""
                     <div style='color: white;'>
-                    • Editing HTML codes
+                    • Editation of HTML codes for the modification of email marketing content
                     </div>
                     """, unsafe_allow_html=True)   
     ### PICTURE PART OF THE MARKETING TRAINEE SECTION ###    
@@ -278,6 +299,7 @@ if st.session_state.selected_section == "Skills & Tools":
     with main_content_skills_picture_part:
         st.image("images/profile_skills_icon.png", width=200)
 
+    st.text("")
     ### PROGRAMMING LANGUAGES SECTION ###
     main_content_programming_languages_text_part, programming_languages_filler_part, main_content_programming_languages_picture_part = st.columns([11, 1, 3], gap="small")
     ### TEXT PART OF THE PROGRAMMING LANGUAGES SECTION ###
@@ -285,28 +307,29 @@ if st.session_state.selected_section == "Skills & Tools":
         st.title("Programming Languages")
         st.markdown("""
                     <div style='color: white;'>
-                    • Python
+                    • <b>Python</b> - TensorFlow, Scikit-Learn, XGBoost, CatBoost, LightGBM, statsmodels, Pandas, NumPy, BeautifulSoup, Streamlit, Gradio, Matplotlib, Plotly, Seaborn
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • SQL
+                    • <b>SQL</b>
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • M
+                    • <b>M</b>
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • Power fx
+                    • <b>Power fx</b>
                     </div>
                     """, unsafe_allow_html=True)
     ### PICTURE PART OF THE PROGRAMMING LANGUAGES SECTION ###    
     with main_content_programming_languages_picture_part:
         st.image("images/profile_programming_languages_icon.png", width=200)
 
+    st.text("")
     ### TOOLS SECTION ###
     main_content_tools_text_part, tools_filler_part, main_content_tools_picture_part = st.columns([11, 1, 3], gap="small")
     ### TEXT PART OF THE TOOLS SECTION ###
@@ -314,52 +337,52 @@ if st.session_state.selected_section == "Skills & Tools":
         st.title("Tools")
         st.markdown("""
                     <div style='color: white;'>
-                    • General office tools - MS Office Suite
+                    • <b>General office tools</b> - MS Office Suite
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • Visualization tools - Power BI, Excel 
+                    • <b>Visualization tools</b> - MS Power BI, Google Looker Studio, MS Excel 
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • Databases - MS SQL, MySQL, Snowflake, MS Access
+                    • <b>Databases</b> - Azure SQL, MS SQL, MySQL, Snowflake, MS Access
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • Code editors - VSCode, JupyterLab, Google Colab 
+                    • <b>Code editors</b> - VSCode, JupyterLab, Google Colab 
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • ETL tools - Azure Data Factory, Pentaho 
+                    • <b>ETL tools</b> - Azure Data Factory, Pentaho 
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • ML development & deployment - Azure ML 
+                    • <b>ML development & deployment</b> - Azure ML 
                     </div>
                     """, unsafe_allow_html=True)    
         st.markdown("""
                     <div style='color: white;'>
-                    • Code versioning - GitHub
+                    • <b>Code versioning</b> - GitHub
                     </div>
                     """, unsafe_allow_html=True)   
         st.markdown("""
                     <div style='color: white;'>
-                    • Project management - Trello
+                    • <b>Project management</b> - Trello
                     </div>
                     """, unsafe_allow_html=True) 
         st.markdown("""
                     <div style='color: white;'>
-                    • App development tools - Power Apps
+                    • <b>App development tools</b> - MS Power Apps
                     </div>
                     """, unsafe_allow_html=True)  
         st.markdown("""
                     <div style='color: white;'>
-                    • Automation - Azure Automation, Power Automate
+                    • <b>Automation</b> - Azure Automation, MS Power Automate
                     </div>
                     """, unsafe_allow_html=True)     
     ### PICTURE PART OF THE TOOLS SECTION ###    
@@ -374,23 +397,24 @@ if st.session_state.selected_section == "Certifications & Courses":
         st.title("Certifications")
         st.markdown("""
                     <div style='color: white;'>
-                    • English CAE C1
+                    • <a href="https://www.linkedin.com/in/bc-jaroslav-petr%C3%A1k-7b9704264/details/certifications/1749917664315/single-media-viewer/?profileId=ACoAAEDjc30BZnSbgPlhIyAibehQFfGOTLWfijI" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">English</a> - CAE C1
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • French DELF B1
+                    • <a href="https://www.linkedin.com/in/bc-jaroslav-petr%C3%A1k-7b9704264/details/certifications/1749919080218/single-media-viewer/?profileId=ACoAAEDjc30BZnSbgPlhIyAibehQFfGOTLWfijI" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">French</a> - DELF B1
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • Mathematics +
+                    • <span style="text-decoration: none; color: #ff5757; font-weight: bold;">Mathematics +</span>
                     </div>
                     """, unsafe_allow_html=True)
     ### PICTURE PART OF THE COURSES SECTION ###    
     with main_content_certifications_picture_part:
         st.image("images/profile_certifications_icon.png", width=200)
 
+    st.text("")
     ### COURSES SECTION ###
     main_content_courses_text_part, courses_filler_part, main_content_courses_picture_part = st.columns([11, 1, 3], gap="small")
     ### TEXT PART OF THE COURSES SECTION ###
@@ -398,62 +422,62 @@ if st.session_state.selected_section == "Certifications & Courses":
         st.title("Courses")
         st.markdown("""
                     <div style='color: white;'>
-                    • Machine Learning Explainability
+                    • <a href="https://www.kaggle.com/learn/certification/jaroslavpetrk/machine-learning-explainability" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">Machine Learning Explainability</a> - 2025/03
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • LangChain for Generative AI
+                    • <a href="https://www.udemy.com/certificate/UC-3b00b5e2-8553-4d20-af9f-07767013f444/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">LangChain for Generative AI: Using OpenAI LLMs in Python</a> - 2025/02
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • DP-100 Azure Data Scientist Associate Exam Guide
+                    • <a href="https://www.udemy.com/certificate/UC-1d33734e-bfe2-4647-8e55-68dcc319aff8/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">DP-100 Azure Data Scientist Associate Complete Exam Guide</a> - 2025/01
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • Pentaho for ETL & Data Integration
+                    • <a href="https://www.udemy.com/certificate/UC-2d533184-b618-4f5b-8954-997a820fc1f0/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">Pentaho for ETL & Data Integration Masterclass 2025 - PDI 9</a> - 2025/01
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • Ultimate Azure Data Factory
+                    • <a href="https://www.udemy.com/certificate/UC-fdc5571d-61d5-4762-963c-1bed892735ad/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">Ultimate Azure Data Factory: Cloud Data Engineering</a> - 2025/01
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • Deep Learning: RNN in Python
+                    • <a href="https://www.udemy.com/certificate/UC-64d70f8b-328f-40d9-9fdb-d3c6c7d95c6c/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">Deep Learning: Recurrent Neural Networks in Python</a> - 2024/08
                     </div>
                     """, unsafe_allow_html=True)    
         st.markdown("""
                     <div style='color: white;'>
-                    • Microsoft Applied Skills: Canvas Power Apps
+                    • <a href="https://www.udemy.com/certificate/UC-2c06bced-042e-496e-ab18-102d43c70615/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">Microsoft Applied Skills: Create Canvas Apps with Power Apps</a> - 2024/08
                     </div>
                     """, unsafe_allow_html=True)   
         st.markdown("""
                     <div style='color: white;'>
-                    • Deep Learning with Python & Keras
+                    • <a href="https://www.udemy.com/certificate/UC-331abbf8-f43c-48a0-ab92-6c82a0c28e71/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">Deep Learning with Python & Keras</a> - 2024/07
                     </div>
                     """, unsafe_allow_html=True) 
         st.markdown("""
                     <div style='color: white;'>
-                    • Snowflake Decoded
+                    • <a href="https://www.udemy.com/certificate/UC-e7fe9bf3-8757-4ef1-8540-4ee9fcb37a98/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">Snowflake Decoded - Master the Fundamental Concepts</a> - 2024/04
                     </div>
                     """, unsafe_allow_html=True)  
         st.markdown("""
                     <div style='color: white;'>
-                    • Python for Data Science & ML Bootcamp
+                    • <a href="https://www.udemy.com/certificate/UC-1e138c43-7582-4f48-b125-49cb5216f9b2/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">Python for Data Science & Machine Learning Bootcamp</a> - 2023/08
                     </div>
                     """, unsafe_allow_html=True)     
         st.markdown("""
                     <div style='color: white;'>
-                    • Power BI Essential Training
+                    • <a href="https://www.linkedin.com/learning/certificates/64dc916bc7a5b085739400705b35e84276b8f15fec188be79281781342360afe" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">Power BI Essential Training</a> - 2023/04
                     </div>
                     """, unsafe_allow_html=True)  
         st.markdown("""
                     <div style='color: white;'>
-                    • SQL Essential Training
+                    • <a href="https://www.linkedin.com/learning/certificates/f9289ed9626c4aa51b8e66b1ad789ceee44b8fbd39f6c91440c364972e8b72e6" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">SQL Essential Training</a> - 2023/04
                     </div>
                     """, unsafe_allow_html=True)  
     ### PICTURE PART OF THE COURSES SECTION ###    

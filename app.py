@@ -1,13 +1,12 @@
 import streamlit as st
-import config.config
 
 st.set_page_config(layout="wide")
 
 st.markdown(f"""
     <style>
     .stApp {{
-        background-color: {config.config.background_color} !important;
-        color: {config.config.primary_font_color} !important;
+        background-color: #1f1f1f !important;
+        color: #ffffff !important;
     }}
 
     /* Navigation sidebar background color */
@@ -30,11 +29,11 @@ st.markdown(f"""
     }}
 
     header[data-testid="stHeader"] {{
-        background-color: {config.config.background_color} !important;
+        background-color: #1f1f1f !important;
     }}
 
     header[data-testid="stHeader"] * {{
-        color: {config.config.primary_font_color} !important;
+        color: #ffffff !important;
     }}
 
     footer {{
@@ -45,12 +44,12 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 main_page = st.Page(page="web_pages/main_page.py", title="Main Page")
-salary_predictor = st.Page(page="web_pages/salary_predictor.py", title="Salary Predictor")
+salary_predictor_and_report = st.Page(page="web_pages/salary_predictor_and_report.py", title="Salary Predictor & Report")
 contact = st.Page(page="web_pages/contact.py", title="Contact")
 
 pg = st.navigation({
     "NAVIGATION": [main_page, contact],
-    "Portfolio Projects": [salary_predictor]
+    "Portfolio Projects": [salary_predictor_and_report]
 })
 
 pg.run()

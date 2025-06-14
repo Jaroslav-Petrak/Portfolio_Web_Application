@@ -1,8 +1,21 @@
 import streamlit as st
-import config.config
 import base64
 
-st.markdown(config.config.title_fonts, unsafe_allow_html=True)
+st.markdown("""
+                        <style>
+                        .title-font {
+                            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                            font-size: 48px;
+                            font-weight: bold;
+                            color: #ffffff;
+                        }
+                        .subtitle-font {
+                            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                            font-size: 48px;
+                            color: #f88181;
+                        }
+                        </style>
+                    """, unsafe_allow_html=True)
 st.markdown(f'<div class="title-font">CONTACT</div>', unsafe_allow_html=True)
 st.markdown('<div class="subtitle-font">Information</div>', unsafe_allow_html=True)
 

@@ -1,15 +1,29 @@
 import streamlit as st
-import config.config
 import pandas as pd
 import datetime
 import time
 import json
 from azureml.core.webservice import Webservice
 from azureml.core import Workspace
+import streamlit.components.v1 as components
 
 
 ### CONFIGURATION OF THE TITLE FONTS ###
-st.markdown(config.config.title_fonts, unsafe_allow_html=True)
+st.markdown("""
+                        <style>
+                        .title-font {
+                            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                            font-size: 48px;
+                            font-weight: bold;
+                            color: #ffffff;
+                        }
+                        .subtitle-font {
+                            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                            font-size: 48px;
+                            color: #f88181;
+                        }
+                        </style>
+                    """, unsafe_allow_html=True)
 st.markdown(f'<div class="title-font">SALARY PREDICTOR</div>', unsafe_allow_html=True)
 st.markdown('<div class="subtitle-font">for Fair Compensation</div>', unsafe_allow_html=True)
 
@@ -25,21 +39,9 @@ st.markdown("""
         ">
     """, unsafe_allow_html=True)
 
+
+
 ### BUTTONS ###
-if "selected_section" not in st.session_state:
-    st.session_state.selected_section = "Predictor"
-
-def set_section(section_name):
-    st.session_state.selected_section = section_name
-
-# Button layout
-col1, col2 = st.columns([1, 1])
-with col1:
-    st.button("Predictor", key="btn_predictor", on_click=set_section, args=("Predictor",))
-with col2:
-    st.button("Description", key="btn_description", on_click=set_section, args=("Description",))
-
-set_section = "Prediction" #default
 
 st.markdown("""
     <style>
@@ -58,26 +60,29 @@ st.markdown("""
     }
 
     div[data-testid="stButton"] > button:hover {
-        background-color: #ff5757 !important;
+        background-color: #e04e4e !important;
     }
     </style>
 """, unsafe_allow_html=True)
 
+if "selected_section" not in st.session_state:
+    st.session_state.selected_section = "Predictor"
 
+def set_section(section_name):
+    st.session_state.selected_section = section_name
+
+col1, col2, col3 = st.columns([1, 1, 1])
+with col1:
+    st.button("Predictor", key="btn_predictor", on_click=set_section, args=("Predictor",))
+with col2:
+    st.button("H-1B Salaries Report", key="btn_h1b_salaries_report", on_click=set_section, args=("H-1B Salaries Report",))
+with col3:
+    st.button("Description", key="btn_description", on_click=set_section, args=("Description",))
 
 
 
 ### PREDICTOR SECTION ###
-if st.session_state.selected_section == "Description":
-    ### DESCRIPTION SECTION ###
-    st.title("Description of the Project")
-    st.markdown("""
-                <div style='color: white;'>
-                Predictor has been stemmed based on H-1B visa salary data in the USA. Positions with equivalent job titles have been collected in order to make a representative picture of the salaries. Model has been deployed as an endpoint on Azure Machine Learning. This project is part of the diploma thesis related to the degree of MSc. Applied Data Science & AI with the name Development of a Salary Predictor for Fair Compensation which covers the preprocessing of the data, model development, validation & deployment. Choose the company, job title, branch, location, submission date of the documents related to the work-related visa as well as starting date on the position & make a prediction of expected salary. Last update of the model has been done in May 2025.
-                </div>
-                """, unsafe_allow_html=True)
-    
-else:
+if st.session_state.selected_section != "Description" and st.session_state.selected_section != "H-1B Salaries Report":
     st.title("Predictor")
     ### DATA FOR THE SEARCH BARS ###
     df = pd.read_csv("data/source_for_search_bars.csv")
@@ -190,11 +195,11 @@ else:
                     }
             edited_input_data = json.dumps([data_from_user_input], indent=2)
             
-            subscription_id = config.config.azure_config["subscription_id"]
-            resource_group = config.config.azure_config["resource_group"]
-            workspace_name = config.config.azure_config["workspace_name"]
-            web_service_name = config.config.azure_config["web_service_name"]
-            model_name = config.config.azure_config["model_name"]
+            subscription_id = st.secrets["subscription_id"]
+            resource_group = st.secrets["resource_group"]
+            workspace_name = st.secrets["workspace_name"]
+            web_service_name = st.secrets["web_service_name"]
+            model_name = st.secrets["model_name"]
             workspace = Workspace.get(name=workspace_name,
                                     subscription_id=subscription_id,
                                     resource_group=resource_group)
@@ -235,7 +240,31 @@ else:
                 """,
                 unsafe_allow_html=True
             )
+### H-1B SALARIES DASHBOARD SECTION ###
+if st.session_state.selected_section == "H-1B Salaries Report":
+    dashboard_url = "https://lookerstudio.google.com/embed/reporting/263493b9-9aea-45df-85a8-e7e6a431bc72/page/tz6NF"
+    components.iframe(dashboard_url, width=1600, height=1200, scrolling=True)
 
+### DESCRIPTION SECTION ###
+if st.session_state.selected_section == "Description":
+    st.title("Description of the Project")
+    st.markdown("""
+                <div style='color: white;'>
+                Predictor has been stemmed from <a href="https://h1bdata.info/index.php" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757;">H1B visa salary data</a>  in the USA. Positions with equivalent job titles have been collected in order to make a representative picture of the salaries. Model has been deployed as an endpoint on Azure Machine Learning. This project is part of the diploma thesis related to the degree of MSc. Applied Data Science & AI with the name Development of a Salary Predictor for Fair Compensation which covers the preprocessing of the data, model development, validation & deployment. Choose the company, job title, branch, location, submission date of the documents related to the work-related visa as well as starting date on the position & make a prediction of expected salary. Last update of the model has been done in May 2025.
+                </div>
+                """, unsafe_allow_html=True)
+    st.text("")
+    st.markdown("""
+                <div style='color: white;'>
+                H-1B Salaries Report has been built inside Google's Looker Studio which provides free reporting solution with embedding capability. Preprocessed data that has been used to train the machine learning model has been utilized inside the report to maintain consistency given the filtering during the cleaning & standardization of the underlying data.
+                </div>
+                """, unsafe_allow_html=True)
+    st.text("")
+    st.markdown("""
+                <div style='color: white;'>
+                Last update of the model has been done in May 2025.
+                </div>
+                """, unsafe_allow_html=True)
 
 
 

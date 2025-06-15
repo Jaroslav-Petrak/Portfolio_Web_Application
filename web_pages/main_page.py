@@ -50,7 +50,7 @@ with button_part_2:
 with button_part_3:
     st.button("Skills & Tools", key="btn_skills_and_tools", on_click=set_section, args=("Skills & Tools",))
 with button_part_4:
-    st.button("Certifications & Courses", key="btn_certifications_and_courses", on_click=set_section, args=("Certifications & Courses",))
+    st.button("Certs & Courses", key="btn_certs_and_courses", on_click=set_section, args=("Certs & Courses",))
 
 st.markdown("""
             <style>
@@ -74,7 +74,7 @@ st.markdown("""
             }
             </style>
         """, unsafe_allow_html=True)
-if st.session_state.selected_section != "Experience" and st.session_state.selected_section != "Skills & Tools" and st.session_state.selected_section != "Certifications & Courses":
+if st.session_state.selected_section != "Experience" and st.session_state.selected_section != "Skills & Tools" and st.session_state.selected_section != "Certs & Courses":
     ### OVERVIEW SECTION ###
     main_content_overview_text_part, overview_filler_part ,main_content_overview_picture_part = st.columns([11,1,3], gap="small")
     ### TEXT PART OF THE OVERVIEW SECTION ###
@@ -389,7 +389,7 @@ if st.session_state.selected_section == "Skills & Tools":
     with main_content_tools_picture_part:
         st.image("images/profile_tools_icon.png", width=200)
 
-if st.session_state.selected_section == "Certifications & Courses":
+if st.session_state.selected_section == "Certs & Courses":
     ### CERTIFICATIONS SECTION ###
     main_content_certifications_text_part, certifications_filler_part, main_content_certifications_picture_part = st.columns([11, 1, 3], gap="small")
     ### TEXT PART OF THE COURSES SECTION ###

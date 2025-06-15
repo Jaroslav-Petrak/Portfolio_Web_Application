@@ -4,7 +4,6 @@ import datetime
 import time
 import json
 import streamlit.components.v1 as components
-import traceback
 import requests
 
 ### CONFIGURATION OF THE TITLE FONTS ###

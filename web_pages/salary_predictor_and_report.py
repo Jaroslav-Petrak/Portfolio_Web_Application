@@ -28,9 +28,6 @@ st.markdown("""<style>
     div[data-testid="stButton"] > button:hover {background-color: #e04e4e !important;}
     </style>""", unsafe_allow_html=True)
 
-if "selected_section" not in st.session_state:
-    st.session_state.selected_section = "Predictor"
-
 def set_section(section_name):
     st.session_state.selected_section = section_name
 

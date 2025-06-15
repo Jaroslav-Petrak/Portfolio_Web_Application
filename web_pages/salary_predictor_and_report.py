@@ -114,18 +114,14 @@ if st.session_state.selected_section != "Description" and st.session_state.selec
                         </div>""", unsafe_allow_html=True)
 
         else:
-            data_from_user_input = {
-                "EMPLOYER": selected_value_company,
-                "JOB TITLE": selected_value_job_title,
-                "LOCATION": selected_value_location,
-                "SUBMIT DATE": selected_submission_date.strftime("%#m/%#d/%Y"),
-                "START DATE": selected_start_date.strftime("%#m/%#d/%Y"),
-                "BRANCH": selected_value_branch,
-            }
+            data_from_user_input = {"EMPLOYER": selected_value_company,
+                                    "JOB TITLE": selected_value_job_title,
+                                    "LOCATION": selected_value_location,
+                                    "SUBMIT DATE": selected_submission_date.strftime("%#m/%#d/%Y"),
+                                    "START DATE": selected_start_date.strftime("%#m/%#d/%Y"),
+                                    "BRANCH": selected_value_branch}
             edited_input_data = json.dumps([data_from_user_input], indent=2)
-
             log_placeholder = st.empty()
-
             def update_logs(new_message):
                 log_placeholder.markdown(
                     f"""<div style='margin-top: 30px; display: flex; justify-content: center;'>
@@ -133,7 +129,6 @@ if st.session_state.selected_section != "Description" and st.session_state.selec
                         {new_message}
                         </pre>
                     </div>""", unsafe_allow_html=True)
-
             try:
                 update_logs("Getting to the endpoint of the ML Model...")
                 scoring_uri = st.secrets["scoring_uri"]
@@ -146,10 +141,8 @@ if st.session_state.selected_section != "Description" and st.session_state.selec
                 prediction_value = parsed_json_prediction["result"][0][0]
                 clean_prediction = int(prediction_value)
                 update_logs("Prediction calculated successfully.")
-
                 st.text("")
                 st.text("")
-
                 st.markdown(
                     f"""<div style="display: flex; justify-content: center;">
                         <div style="background-color: #000000; padding: 30px; border-radius: 16px; width: 600px; color: white;">
@@ -165,10 +158,8 @@ if st.session_state.selected_section != "Description" and st.session_state.selec
                         </div>
                     </div>
                     """, unsafe_allow_html=True)
-
             except Exception:
                 update_logs("An error occurred during prediction.")
-                update_logs(traceback.format_exc())
 
 ### H-1B SALARIES DASHBOARD SECTION ###
 if st.session_state.selected_section == "H-1B Salaries Report":

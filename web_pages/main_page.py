@@ -87,7 +87,9 @@ if st.session_state.selected_section != "Experience" and st.session_state.select
                     """, unsafe_allow_html=True)
     ### PICTURE PART OF THE OVERVIEW SECTION ###    
     with main_content_overview_picture_part:
-            st.image("images/profile_picture.png", width=200, use_container_width = False)
+        st.text("")
+        st.text("")    
+        st.image("images/profile_picture.png", width=200, use_container_width = False)
 
     ### EDUCATION SECTION ###  
     main_content_education_text_part, education_filler_part, main_content_education_picture_part = st.columns([11, 1, 3], gap="small")
@@ -112,6 +114,8 @@ if st.session_state.selected_section != "Experience" and st.session_state.select
     
     ### TEXT PART OF THE EDUCATION SECTION ###
     with main_content_education_picture_part:
+        st.text("")
+        st.text("")    
         st.image("images/profile_education_icon.png", width=200)    
     
     ### LANGUAGES SECTION ###
@@ -136,6 +140,8 @@ if st.session_state.selected_section != "Experience" and st.session_state.select
                     """, unsafe_allow_html=True)
     ### PICTURE PART OF THE LANGUAGES SECTION ###    
     with main_content_languages_picture_part:
+        st.text("") 
+        st.text("")    
         st.image("images/profile_languages_icon.png", width=200)
 if st.session_state.selected_section == "Experience":
     st.title("Experience")
@@ -176,6 +182,7 @@ if st.session_state.selected_section == "Experience":
                     """, unsafe_allow_html=True)          
     ### PICTURE PART OF THE HR CONTROLLING DATA ANALYST SECTION ###    
     with main_content_position_1_picture_part:
+        st.text("")    
         st.image("images/experience_cetin_logo.png", width=200)
 
     st.text("")
@@ -206,6 +213,7 @@ if st.session_state.selected_section == "Experience":
                     """, unsafe_allow_html=True)   
     ### PICTURE PART OF THE DATA ANALYST SUPPORT SECTION ###    
     with main_content_position_2_picture_part:
+        st.text("")    
         st.image("images/experience_cetin_logo.png", width=200)
 
     st.text("")
@@ -231,6 +239,7 @@ if st.session_state.selected_section == "Experience":
                     """, unsafe_allow_html=True)   
     ### PICTURE PART OF THE HR TRAINEE SECTION ###    
     with main_content_position_3_picture_part:
+        st.text("")    
         st.image("images/experience_adastra_logo.png", width=200)
 
     st.text("")
@@ -261,6 +270,7 @@ if st.session_state.selected_section == "Experience":
                     """, unsafe_allow_html=True)   
     ### PICTURE PART OF THE MARKETING TRAINEE SECTION ###    
     with main_content_position_4_picture_part:
+        st.text("")    
         st.image("images/experience_cpi_hotels_logo.png", width=200)
 
 if st.session_state.selected_section == "Skills & Tools":
@@ -297,6 +307,8 @@ if st.session_state.selected_section == "Skills & Tools":
                     """, unsafe_allow_html=True)
     ### PICTURE PART OF THE SKILLS SECTION ###    
     with main_content_skills_picture_part:
+        st.text("")
+        st.text("")    
         st.image("images/profile_skills_icon.png", width=200)
 
     st.text("")
@@ -327,6 +339,8 @@ if st.session_state.selected_section == "Skills & Tools":
                     """, unsafe_allow_html=True)
     ### PICTURE PART OF THE PROGRAMMING LANGUAGES SECTION ###    
     with main_content_programming_languages_picture_part:
+        st.text("")
+        st.text("")    
         st.image("images/profile_programming_languages_icon.png", width=200)
 
     st.text("")
@@ -387,6 +401,8 @@ if st.session_state.selected_section == "Skills & Tools":
                     """, unsafe_allow_html=True)     
     ### PICTURE PART OF THE TOOLS SECTION ###    
     with main_content_tools_picture_part:
+        st.text("")
+        st.text("")    
         st.image("images/profile_tools_icon.png", width=200)
 
 if st.session_state.selected_section == "Certs & Courses":
@@ -412,6 +428,8 @@ if st.session_state.selected_section == "Certs & Courses":
                     """, unsafe_allow_html=True)
     ### PICTURE PART OF THE COURSES SECTION ###    
     with main_content_certifications_picture_part:
+        st.text("")
+        st.text("")    
         st.image("images/profile_certifications_icon.png", width=200)
 
     st.text("")
@@ -482,6 +500,8 @@ if st.session_state.selected_section == "Certs & Courses":
                     """, unsafe_allow_html=True)  
     ### PICTURE PART OF THE COURSES SECTION ###    
     with main_content_courses_picture_part:
+        st.text("")
+        st.text("")    
         st.image("images/profile_courses_icon.png", width=200)
 
 

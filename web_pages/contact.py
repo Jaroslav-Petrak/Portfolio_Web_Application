@@ -55,7 +55,7 @@ with email_icon_part:
     email_icon_base64 = img_to_base64("images/email_icon.png")
     html_code_email_icon = f"""
     <a href="mailto:jaro.p.main@gmail.com" target="_blank" style="display:inline-block;">
-        <img src="data:image/png;base64,{email_icon_base64}" width="88" style="vertical-align:middle;">
+        <img src="data:image/png;base64,{email_icon_base64}" width="90" style="vertical-align:middle;">
     </a>
     """
     st.markdown(html_code_email_icon, unsafe_allow_html=True)

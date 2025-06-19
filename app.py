@@ -2,17 +2,11 @@ import streamlit as st
 import base64
 
 st.set_page_config(layout="wide")
-
-
-# === Function to convert image to Base64 ===
 def get_base64_image(image_path):
     with open(image_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode()
-
-# === Get Base64 string from local image ===
 img_base64 = get_base64_image("images/background.png")
 
-# === Inject custom CSS with background image ===
 st.markdown(f"""
     <style>
     .stApp {{
@@ -54,7 +48,6 @@ st.markdown(f"""
     </style>
 """, unsafe_allow_html=True)
 
-# === Navigation ===
 main_page = st.Page(page="web_pages/main_page.py", title="Main Page")
 salary_predictor_and_report = st.Page(page="web_pages/salary_predictor_and_report.py", title="Salary Predictor & Report")
 chatbot = st.Page(page="web_pages/chatbot.py", title="Chatbot")

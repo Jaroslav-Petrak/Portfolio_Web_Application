@@ -50,11 +50,10 @@ st.markdown(f"""
 
 main_page = st.Page(page="web_pages/main_page.py", title="Main Page")
 salary_predictor_and_report = st.Page(page="web_pages/salary_predictor_and_report.py", title="Salary Predictor & Report")
-chatbot = st.Page(page="web_pages/chatbot.py", title="Chatbot")
 contact = st.Page(page="web_pages/contact.py", title="Contact")
 
 pg = st.navigation({
-    "NAVIGATION": [main_page, contact, chatbot],
+    "NAVIGATION": [main_page, contact],
     "Portfolio Projects": [salary_predictor_and_report]
 })
 pg.run()

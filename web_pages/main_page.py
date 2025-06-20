@@ -76,7 +76,7 @@ st.markdown("""
         """, unsafe_allow_html=True)
 if st.session_state.selected_section != "Experience" and st.session_state.selected_section != "Skills & Tools" and st.session_state.selected_section != "Certs & Courses":
     ### OVERVIEW SECTION ###
-    main_content_overview_text_part, overview_filler_part ,main_content_overview_picture_part = st.columns([11,1,3], gap="small")
+    main_content_overview_text_part, overview_filler_part, main_content_overview_picture_part = st.columns([11,1,3], gap="small")
     ### TEXT PART OF THE OVERVIEW SECTION ###
     with main_content_overview_text_part:
         st.title("Overview")

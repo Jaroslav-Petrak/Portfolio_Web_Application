@@ -49,11 +49,15 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 main_page = st.Page(page="web_pages/main_page.py", title="Main Page")
-salary_predictor_and_report = st.Page(page="web_pages/salary_predictor_and_report.py", title="Salary Predictor & Report")
 contact = st.Page(page="web_pages/contact.py", title="Contact")
+
+salary_predictor_and_report = st.Page(page="web_pages/salary_predictor_and_report.py", title="Salary Predictor & Report")
+#versatile_text_classifier = st.Page(page="web_pages/versatile_text_classifier.py", title = "Versatile Text Classifier")
 
 pg = st.navigation({
     "NAVIGATION": [main_page, contact],
-    "Portfolio Projects": [salary_predictor_and_report]
+    "Portfolio Projects": [salary_predictor_and_report, 
+                           #versatile_text_classifier
+                           ]
 })
 pg.run()

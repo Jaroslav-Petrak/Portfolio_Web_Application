@@ -32,7 +32,7 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 ### CREATION OF 2 SEPARATE COLUMNS FOR LINKED & EMAIL ###
-linkedin_icon_part, email_icon_part, filler_part = st.columns([2, 2, 14], gap="small")
+linkedin_icon_part, github_icon_part, email_icon_part, filler_part = st.columns([2, 2, 2, 13], gap="small")
 
 
 def img_to_base64(img_path):
@@ -49,6 +49,16 @@ with linkedin_icon_part:
     </a>
     """
     st.markdown(html_code_linkedin_icon, unsafe_allow_html=True)
+
+### GITHUB PART ###
+with github_icon_part:
+    github_icon_base64 = img_to_base64("images/github_icon.png")
+    html_code_github_icon = f"""
+    <a href="https://github.com/Jaroslav-Petrak/" target="_blank" style="display:inline-block;">
+        <img src="data:image/png;base64,{github_icon_base64}" width="88" style="vertical-align:middle;">
+    </a>
+    """
+    st.markdown(html_code_github_icon, unsafe_allow_html=True)
 
 ### EMAIL PART ###
 with email_icon_part:

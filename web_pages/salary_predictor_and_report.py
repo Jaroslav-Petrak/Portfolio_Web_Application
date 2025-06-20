@@ -15,18 +15,18 @@ st.markdown('<div class="title-font">SALARY PREDICTOR</div>', unsafe_allow_html=
 st.markdown('<div class="subtitle-font">for Fair Compensation</div>', unsafe_allow_html=True)
 
 ### FIRST DIVISION LINE ###
-st.markdown("""<hr style="border: none; height: 4px; background-color: white; margin: 10px 0; box-shadow: none; opacity: 1;">""", unsafe_allow_html=True)
+st.markdown("""
+    <hr style="
+        border: none;
+        height: 4px;
+        background-color: white;
+        margin: 10px 0;
+        box-shadow: none;
+        opacity: 1;
+    ">
+""", unsafe_allow_html=True)
 
 ### BUTTONS ###
-st.markdown("""<style>
-    div[data-testid="stButton"] > button {color: white !important; background-color: #ff5757 !important; border-radius: 8px !important;
-                                          font-weight: bold !important; font-size: 18px !important; padding: 10px 30px !important; 
-                                          width: 100% !important; height: 50px !important; border: none !important; cursor: pointer;
-                                          transition: background-color 0.3s ease !important;}
-
-    div[data-testid="stButton"] > button:hover {background-color: #e04e4e !important;}
-    </style>""", unsafe_allow_html=True)
-
 if "selected_section" not in st.session_state:
     st.session_state.selected_section = "Predictor"
 
@@ -40,6 +40,15 @@ with col2:
     st.button("H-1B Salaries Report", key="btn_h1b_salaries_report", on_click=set_section, args=("H-1B Salaries Report",))
 with col3:
     st.button("Description", key="btn_description", on_click=set_section, args=("Description",))
+
+st.markdown("""<style>
+    div[data-testid="stButton"] > button {color: white !important; background-color: #ff5757 !important; border-radius: 8px !important;
+                                          font-weight: bold !important; font-size: 18px !important; padding: 10px 30px !important; 
+                                          width: 100% !important; height: 50px !important; border: none !important; cursor: pointer;
+                                          transition: background-color 0.3s ease !important;}
+
+    div[data-testid="stButton"] > button:hover {background-color: #e04e4e !important;}
+    </style>""", unsafe_allow_html=True)
 
 ### PREDICTOR SECTION ###
 if st.session_state.selected_section != "Description" and st.session_state.selected_section != "H-1B Salaries Report":

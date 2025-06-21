@@ -105,7 +105,6 @@ if st.session_state.get("selected_section") != "Description Versatile Text Class
         text = st.text_area("Enter text to classify")
 
     ### LOAD CLASSIFIER ###
-    @st.cache_resource
     def load_zero_shot_classifier():
         return pipeline(
             "zero-shot-classification",
@@ -115,6 +114,7 @@ if st.session_state.get("selected_section") != "Description Versatile Text Class
         )
 
     classifier = load_zero_shot_classifier()
+
 
     ### LABELS ###
     if "labels" not in st.session_state:

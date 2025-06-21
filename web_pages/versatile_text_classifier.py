@@ -108,8 +108,8 @@ if st.session_state.get("selected_section") != "Description Versatile Text Class
     def load_zero_shot_classifier():
         return pipeline(
             "zero-shot-classification",
-            model="typeform/distilbert-base-uncased-mnli",
-            tokenizer="typeform/distilbert-base-uncased-mnli",
+            model="model/model",
+            tokenizer="model/tokenizer",
             framework="pt"
         )
 

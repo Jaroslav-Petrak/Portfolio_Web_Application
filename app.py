@@ -15,49 +15,35 @@ st.markdown(f"""
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center;
-        color: #ffffff !important;
-    }}
+        color: #ffffff !important;}}
 
-    section[data-testid="stSidebar"] {{
-        background-color: #2C3E50 !important;
-    }}
+    section[data-testid="stSidebar"] {{background-color: #2C3E50 !important;}}
 
-    section[data-testid="stSidebar"] * {{
-        color: #F1F1F1 !important;
-    }}
+    section[data-testid="stSidebar"] * {{color: #F1F1F1 !important;}}
 
     section[data-testid="stSidebar"] a:hover {{
         background-color: #1f1f1f !important;
         transition: all 0.3s ease;
         border-radius: 5px;
         padding: 5px 10px;
-        text-decoration: none;
-    }}
+        text-decoration: none;}}
 
-    header[data-testid="stHeader"] {{
-        background-color: #1f1f1f !important;
-    }}
+    header[data-testid="stHeader"] {{background-color: #1f1f1f !important;}}
 
-    header[data-testid="stHeader"] * {{
-        color: #ffffff !important;
-    }}
+    header[data-testid="stHeader"] * {{color: #ffffff !important;}}
 
-    footer {{
-        visibility: hidden;
-    }}
+    footer {{visibility: hidden;}}
     </style>
 """, unsafe_allow_html=True)
 
 main_page = st.Page(page="web_pages/main_page.py", title="Main Page")
 contact = st.Page(page="web_pages/contact.py", title="Contact")
-
 salary_predictor_and_report = st.Page(page="web_pages/salary_predictor_and_report.py", title="Salary Predictor & Report")
-#versatile_text_classifier = st.Page(page="web_pages/versatile_text_classifier.py", title = "Versatile Text Classifier")
+versatile_text_classifier = st.Page(page="web_pages/versatile_text_classifier.py", title = "Versatile Text Classifier")
 
 pg = st.navigation({
     "NAVIGATION": [main_page, contact],
     "Portfolio Projects": [salary_predictor_and_report, 
-                           #versatile_text_classifier
-                           ]
-})
+                           versatile_text_classifier
+                           ]})
 pg.run()

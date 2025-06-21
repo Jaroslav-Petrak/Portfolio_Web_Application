@@ -5,12 +5,12 @@ from io import BytesIO
 import plotly.express as px
 import os
 
-# === HEADERS ===
+### HEADERS ###
 st.markdown(f'<div class="title-font">VERSATILE</div>', unsafe_allow_html=True)
 st.markdown('<div class="subtitle-font">Text Classifier</div>', unsafe_allow_html=True)
 st.markdown("""<hr style="border: none; height: 4px; background-color: white; margin: 10px 0;">""", unsafe_allow_html=True)
 
-# === SECTION SELECTION ===
+### SECTION SELECTION ###
 if "selected_section" not in st.session_state:
     st.session_state.selected_section = "Versatile Text Classifier"
 
@@ -23,7 +23,7 @@ with col1:
 with col2:
     st.button("Description", key="btn_description_versatile_text_classifier", on_click=set_section, args=("Description Versatile Text Classifier",))
 
-# === STYLES ===
+### STYLES ###
 st.markdown("""
     <style>
     .title-font {
@@ -77,7 +77,6 @@ if st.session_state.get("selected_section") != "Description Versatile Text Class
 
     mode = st.radio("Choose input mode:", ["Typing field", "File with a text column (CSV/Excel)"])
 
-    # Clear result table when switching to Typing field
     if mode == "Typing field" and "classified_data" in st.session_state:
         del st.session_state.classified_data
 
@@ -105,7 +104,7 @@ if st.session_state.get("selected_section") != "Description Versatile Text Class
     else:
         text = st.text_area("Enter text to classify")
 
-    # === LOAD CLASSIFIER ===
+    ### LOAD CLASSIFIER ###
     @st.cache_resource
     def load_zero_shot_classifier():
         return pipeline(
@@ -117,7 +116,7 @@ if st.session_state.get("selected_section") != "Description Versatile Text Class
 
     classifier = load_zero_shot_classifier()
 
-    # === LABELS ===
+    ### LABELS ###
     if "labels" not in st.session_state:
         st.session_state.labels = []
     if "label_to_remove" not in st.session_state:
@@ -148,7 +147,7 @@ if st.session_state.get("selected_section") != "Description Versatile Text Class
             st.session_state.label_to_remove = label
             st.rerun()
 
-    # === CLASSIFY TEXT FIELD ===
+    ### CLASSIFY TEXT FIELD ###
     if mode == "Typing field":
         if st.button("Classify"):
             if "classified_data" in st.session_state:
@@ -206,7 +205,7 @@ if st.session_state.get("selected_section") != "Description Versatile Text Class
 
                 st.plotly_chart(fig)
 
-    # === CLASSIFY FILE COLUMN ===
+    ### CLASSIFY FILE COLUMN ###
     elif mode == "File with a text column (CSV/Excel)":
         if data is not None:
             st.subheader("Choose the Textual Column to be Classified")
@@ -226,7 +225,7 @@ if st.session_state.get("selected_section") != "Description Versatile Text Class
                 data[f"Label Probability (%) - {text_column}"] = [f"{round(score * 100, 1)}%" for score in scores]
                 st.session_state.classified_data = data.copy()
 
-    # === SHOW CLASSIFIED TABLE ===
+    ### SHOW CLASSIFIED TABLE ###
     if "classified_data" in st.session_state:
         st.subheader("Result")
         st.dataframe(st.session_state.classified_data)
@@ -250,7 +249,7 @@ if st.session_state.get("selected_section") != "Description Versatile Text Class
         with col2:
             st.download_button("Download as Excel", data=excel_data, file_name=f"{filename_without_extension}_classified_data.xlsx", mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 
-### === DESCRIPTION ===
+### DESCRIPTION ###
 else:
     st.title("Description of the Project")
     st.markdown("""<div style='color: white;'>

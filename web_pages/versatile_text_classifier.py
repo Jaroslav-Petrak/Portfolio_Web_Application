@@ -105,6 +105,7 @@ if st.session_state.get("selected_section") != "Description Versatile Text Class
         text = st.text_area("Enter text to classify")
 
     ### LOAD CLASSIFIER ###
+    #Model - MoritzLaurer/xtremedistil-l6-h256-mnli-fever-anli-ling-binary
     def load_zero_shot_classifier():
         return pipeline(
             "zero-shot-classification",

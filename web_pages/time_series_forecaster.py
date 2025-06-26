@@ -62,7 +62,7 @@ st.markdown("""<style>
 
 if st.session_state.selected_section != "Time Series Forecaster Description":
     st.title("Forecaster")
-    uploaded_file = st.file_uploader("Upload CSV or Excel file", type=["csv", "xlsx", "xls"])
+    uploaded_file = st.file_uploader("Choose CSV or Excel file", type=["csv", "xlsx", "xls"])
 
     if uploaded_file:
         if uploaded_file.name.endswith('.csv'):

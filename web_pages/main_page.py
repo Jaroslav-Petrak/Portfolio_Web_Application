@@ -440,6 +440,11 @@ if st.session_state.selected_section == "Certs & Courses":
         st.title("Courses")
         st.markdown("""
                     <div style='color: white;'>
+                    • <a href="https://udemy.com/certificate/UC-f7283a21-2186-4403-8e09-500df190aac8/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">The Ultimate Beginners Guide to Python Recommender Systems</a> - 2025/06
+                    </div>
+                    """, unsafe_allow_html=True)
+        st.markdown("""
+                    <div style='color: white;'>
                     • <a href="https://www.kaggle.com/learn/certification/jaroslavpetrk/machine-learning-explainability" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">Machine Learning Explainability</a> - 2025/03
                     </div>
                     """, unsafe_allow_html=True)

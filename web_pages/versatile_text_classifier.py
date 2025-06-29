@@ -53,21 +53,18 @@ st.markdown("""
     button[kind="secondary"]:hover, button[kind="primary"]:hover {
         background-color: #e04e4e !important;
     }
-    [data-testid="stRadio"] label, 
-    [data-testid="stRadio"] div[role="radiogroup"] > label,
-    [data-testid="stRadio"] div[role="radiogroup"] label > div,
+    [data-testid="stRadio"] label,
     [data-testid="stTextInput"] label,
     [data-testid="stTextArea"] label,
     [data-testid="stFileUploader"] label,
     [data-testid="stSelectbox"] label {
         color: white !important;
     }
-    /* Target the file size text next to uploaded file name */
     [data-testid="stFileUploader"] small {
         color: gray !important;
-        font-size: 14px !important;  /* Optional: adjust size */
-        font-weight: 500 !important; /* Optional: adjust weight */
-    }        
+        font-size: 14px !important;
+        font-weight: 500 !important;
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -105,7 +102,6 @@ if st.session_state.get("selected_section") != "Description Versatile Text Class
         text = st.text_area("Enter text to classify")
 
     ### LOAD CLASSIFIER ###
-    #Model - MoritzLaurer/xtremedistil-l6-h256-mnli-fever-anli-ling-binary
     def load_zero_shot_classifier():
         return pipeline(
             "zero-shot-classification",
@@ -115,7 +111,6 @@ if st.session_state.get("selected_section") != "Description Versatile Text Class
         )
 
     classifier = load_zero_shot_classifier()
-
 
     ### LABELS ###
     if "labels" not in st.session_state:
@@ -214,17 +209,38 @@ if st.session_state.get("selected_section") != "Description Versatile Text Class
             text_column = st.selectbox("Select the column to classify", text_columns)
 
             if st.button("Classify Column") and text_column and st.session_state.labels:
-                predictions, scores = [], []
+                predictions, scores, clean_indices = [], [], []
+
+                def clean_text(text):
+                    if not isinstance(text, str):
+                        return ""
+                    return text.encode("utf-8", "ignore").decode("utf-8").strip()
+
                 with st.spinner("Classifying each row..."):
-                    for text_entry in data[text_column].astype(str):
-                        result = classifier(text_entry, candidate_labels=st.session_state.labels)
-                        predictions.append(result["labels"][0])
-                        scores.append(round(result["scores"][0], 3))
+                    for idx, text_entry in enumerate(data[text_column]):
+                        cleaned = clean_text(text_entry)
+                        if len(cleaned) < 5:
+                            predictions.append("Invalid Input")
+                            scores.append(0.0)
+                            continue
+                        try:
+                            result = classifier(cleaned, candidate_labels=st.session_state.labels)
+                            predictions.append(result["labels"][0])
+                            scores.append(round(result["scores"][0], 3))
+                            clean_indices.append(idx)
+                        except Exception:
+                            predictions.append("Error")
+                            scores.append(0.0)
 
                 data[f"Label - {text_column}"] = predictions
                 data[f"Label Probability (Ratio) - {text_column}"] = scores
-                data[f"Label Probability (%) - {text_column}"] = [f"{round(score * 100, 1)}%" for score in scores]
+                data[f"Label Probability (%) - {text_column}"] = [f"{round(s * 100, 1)}%" for s in scores]
                 st.session_state.classified_data = data.copy()
+
+                bad_rows = data[data[f"Label - {text_column}"].isin(["Invalid Input", "Error"])]
+                if not bad_rows.empty:
+                    st.subheader("Skipped or Failed Rows")
+                    st.dataframe(bad_rows.head(5))
 
     ### SHOW CLASSIFIED TABLE ###
     if "classified_data" in st.session_state:
@@ -242,13 +258,13 @@ if st.session_state.get("selected_section") != "Description Versatile Text Class
 
         csv_data = convert_df_to_csv(st.session_state.classified_data)
         excel_data = convert_df_to_excel(st.session_state.classified_data)
-        filename_without_extension = os.path.splitext(uploaded_file.name)[0] if uploaded_file else "classified_data"
+        filename_base = os.path.splitext(uploaded_file.name)[0] if uploaded_file else "classified_data"
 
         col1, col2 = st.columns(2)
         with col1:
-            st.download_button("Download as CSV", data=csv_data, file_name=f"{filename_without_extension}_classified_data.csv", mime="text/csv")
+            st.download_button("Download as CSV", data=csv_data, file_name=f"{filename_base}_classified_data.csv", mime="text/csv")
         with col2:
-            st.download_button("Download as Excel", data=excel_data, file_name=f"{filename_without_extension}_classified_data.xlsx", mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+            st.download_button("Download as Excel", data=excel_data, file_name=f"{filename_base}_classified_data.xlsx", mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 
 ### DESCRIPTION ###
 else:

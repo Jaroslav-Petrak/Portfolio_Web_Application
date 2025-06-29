@@ -4,6 +4,7 @@ from transformers import pipeline
 from io import BytesIO
 import plotly.express as px
 import os
+import hashlib
 
 ### HEADERS ###
 st.markdown(f'<div class="title-font">VERSATILE</div>', unsafe_allow_html=True)
@@ -244,17 +245,31 @@ if st.session_state.get("selected_section") != "Description Versatile Text Class
         excel_data = convert_df_to_excel(st.session_state.classified_data)
         filename_without_extension = os.path.splitext(uploaded_file.name)[0] if uploaded_file else "classified_data"
 
+        # Generate hash of the dataframe content to use as part of keys
+        def hash_df(df):
+            df_bytes = df.to_csv(index=False).encode('utf-8')
+            return hashlib.md5(df_bytes).hexdigest()
+
+        data_hash = hash_df(st.session_state.classified_data)
+
         col1, col2 = st.columns(2)
         with col1:
-            st.download_button("Download CSV",
-                            data=csv_data,
-                            file_name=f"{filename_without_extension}_classified_data.csv",
-                            mime="text/csv")
+            st.download_button(
+                "Download CSV",
+                data=csv_data,
+                file_name=f"{filename_without_extension}_classified_data.csv",
+                mime="text/csv",
+                key=f"download_csv_{data_hash}"  # unique key per data version
+            )
         with col2:
-            st.download_button("Download Excel",
-                            data=excel_data,
-                            file_name=f"{filename_without_extension}_classified_data.xlsx",
-                            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+            st.download_button(
+                "Download Excel",
+                data=excel_data,
+                file_name=f"{filename_without_extension}_classified_data.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                key=f"download_excel_{data_hash}"  # unique key per data version
+            )
+
 
 ### DESCRIPTION ###
 else:

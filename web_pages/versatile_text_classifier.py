@@ -228,7 +228,7 @@ if st.session_state.get("selected_section") != "Description Versatile Text Class
 
     ### SHOW CLASSIFIED TABLE ###
     if "classified_data" in st.session_state:
-        st.subheader("Result (Showing first 10 rows only)")
+        st.subheader("Preview of Result")
         st.dataframe(st.session_state.classified_data.head(10))  # show only head here
 
         def convert_df_to_csv(df):
@@ -246,12 +246,12 @@ if st.session_state.get("selected_section") != "Description Versatile Text Class
 
         col1, col2 = st.columns(2)
         with col1:
-            st.download_button("Download Full Results as CSV",
+            st.download_button("Download CSV",
                             data=csv_data,
                             file_name=f"{filename_without_extension}_classified_data.csv",
                             mime="text/csv")
         with col2:
-            st.download_button("Download Full Results as Excel",
+            st.download_button("Download Excel",
                             data=excel_data,
                             file_name=f"{filename_without_extension}_classified_data.xlsx",
                             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")

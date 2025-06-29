@@ -41,11 +41,13 @@ contact = st.Page(page="web_pages/contact.py", title="Contact")
 salary_predictor_and_report = st.Page(page="web_pages/salary_predictor_and_report.py", title="Salary Predictor & Report")
 versatile_text_classifier = st.Page(page="web_pages/versatile_text_classifier.py", title = "Versatile Text Classifier")
 time_series_forecaster = st.Page(page = "web_pages/time_series_forecaster.py", title = "Time Series Forecaster")
+airbnb_etl_database_report_and_recommendation_system = st.Page(page = "web_pages/airbnb_etl_database_report_and_recommendation_system.py", title = "Bangkok AirBnB Project ETL, DB, Recommendation Systems ML Project (IN DEVELOPMENT)")
 
 pg = st.navigation({
     "NAVIGATION": [main_page, contact],
     "Portfolio Projects": [salary_predictor_and_report, 
                            versatile_text_classifier,
-                           time_series_forecaster
+                           time_series_forecaster,
+                           airbnb_etl_database_report_and_recommendation_system
                            ]})
 pg.run()

@@ -98,7 +98,7 @@ if st.session_state.get("selected_section") != "Description Versatile Text Class
                         data = None
                     if data is not None:
                         st.write("Preview of loaded data:")
-                        st.dataframe(data)
+                        st.dataframe(data.head(5))
                 except Exception as e:
                     st.error(f"Error loading file: {e}")
     else:

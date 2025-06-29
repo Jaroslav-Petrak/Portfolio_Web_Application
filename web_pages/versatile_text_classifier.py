@@ -216,28 +216,10 @@ if st.session_state.get("selected_section") != "Description Versatile Text Class
             if st.button("Classify Column") and text_column and st.session_state.labels:
                 predictions, scores = [], []
                 with st.spinner("Classifying each row..."):
-                    predictions, scores, clean_indices = [], [], []
-
-                    def clean_text(text):
-                        if not isinstance(text, str):
-                            return ""
-                        return text.encode("utf-8", "ignore").decode("utf-8").strip()
-
-                    with st.spinner("Classifying each row..."):
-                        for idx, text_entry in enumerate(data[text_column]):
-                            cleaned_text = clean_text(text_entry)
-                            if len(cleaned_text) < 5:  # Skip too short or empty rows
-                                predictions.append("Invalid Input")
-                                scores.append(0.0)
-                                continue
-                            try:
-                                result = classifier(cleaned_text, candidate_labels=st.session_state.labels)
-                                predictions.append(result["labels"][0])
-                                scores.append(round(result["scores"][0], 3))
-                                clean_indices.append(idx)
-                            except Exception as e:
-                                predictions.append("Error")
-                                scores.append(0.0)
+                    for text_entry in data[text_column].astype(str):
+                        result = classifier(text_entry, candidate_labels=st.session_state.labels)
+                        predictions.append(result["labels"][0])
+                        scores.append(round(result["scores"][0], 3))
 
                 data[f"Label - {text_column}"] = predictions
                 data[f"Label Probability (Ratio) - {text_column}"] = scores

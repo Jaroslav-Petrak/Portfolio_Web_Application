@@ -96,6 +96,7 @@ def resize_then_crop_center_rectangle(img, target_width, target_height):
     img_cropped = img_resized.crop((left, top, right, bottom))
     return img_cropped
 
+@st.cache_data(show_spinner=False)
 def recommend_bangkok_airbnb(df, user_chosen_listing_id, top_n=5):
     ### FEATURE ENGINEERING ###
         df_original = df.copy()

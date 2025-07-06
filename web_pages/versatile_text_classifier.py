@@ -230,7 +230,7 @@ if st.session_state.get("selected_section") != "Description Versatile Text Class
     ### SHOW CLASSIFIED TABLE ###
     if "classified_data" in st.session_state:
         st.subheader("Preview of Result")
-        st.dataframe(st.session_state.classified_data.head(10))  # show only head here
+        st.dataframe(st.session_state.classified_data.head(10))
 
         def convert_df_to_csv(df):
             return df.to_csv(index=False).encode('utf-8')
@@ -245,7 +245,6 @@ if st.session_state.get("selected_section") != "Description Versatile Text Class
         excel_data = convert_df_to_excel(st.session_state.classified_data)
         filename_without_extension = os.path.splitext(uploaded_file.name)[0] if uploaded_file else "classified_data"
 
-        # Generate hash of the dataframe content to use as part of keys
         def hash_df(df):
             df_bytes = df.to_csv(index=False).encode('utf-8')
             return hashlib.md5(df_bytes).hexdigest()
@@ -259,7 +258,7 @@ if st.session_state.get("selected_section") != "Description Versatile Text Class
                 data=csv_data,
                 file_name=f"{filename_without_extension}_classified_data.csv",
                 mime="text/csv",
-                key=f"download_csv_{data_hash}"  # unique key per data version
+                key=f"download_csv_{data_hash}"
             )
         with col2:
             st.download_button(
@@ -267,7 +266,7 @@ if st.session_state.get("selected_section") != "Description Versatile Text Class
                 data=excel_data,
                 file_name=f"{filename_without_extension}_classified_data.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                key=f"download_excel_{data_hash}"  # unique key per data version
+                key=f"download_excel_{data_hash}"
             )
 
 

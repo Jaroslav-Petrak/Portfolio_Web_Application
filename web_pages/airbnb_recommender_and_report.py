@@ -270,7 +270,8 @@ if st.session_state.selected_section == "Bangkok AirBnB Recommender":
 
     st.markdown("---")
 
-    df_recommendation = recommend_bangkok_airbnb(df=df_original, user_chosen_listing_id=listing["id"], top_n=5)
+    with st.spinner("Loading recommendations..."):
+        df_recommendation = recommend_bangkok_airbnb(df=df_original, user_chosen_listing_id=listing["id"], top_n=5)
     st.markdown("## What about these?")
 
     number_of_recommendations = len(df_recommendation)
@@ -285,7 +286,7 @@ if st.session_state.selected_section == "Bangkok AirBnB Recommender":
                         img = Image.open(BytesIO(response.content)).convert("RGB")
                         img_cropped = resize_then_crop_center_rectangle(img, 1000, 1000)
                         img_base64 = pil_image_to_base64(img_cropped)
-                        img_html = f'<img src="data:image/png;base64,{img_base64}" width="300" style="border-radius: 10px;" />'
+                        img_html = f'<img src="data:image/png;base64,{img_base64}" width="300" style="border-radius: 24px;" />'
                     except Exception as e:
                         img_html = '<div style="width:300px; height:300px; background:#eee; display:flex; align-items:center; justify-content:center;">Image Unavailable</div>'
 

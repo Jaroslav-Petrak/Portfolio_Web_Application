@@ -48,6 +48,6 @@ pg = st.navigation({
     "Portfolio Projects": [salary_predictor_and_report, 
                            versatile_text_classifier,
                            time_series_forecaster,
-                           airbnb_etl_database_report_and_recommendation_system
+                           #airbnb_etl_database_report_and_recommendation_system
                            ]})
 pg.run()

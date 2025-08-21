@@ -5,7 +5,7 @@ import time
 import streamlit.components.v1 as components
 from salary_predictor_for_fair_compensation.salary_predictor_preprocessor import preprocessing_pipeline
 import tensorflow as tf
-import traceback
+#import traceback
 #import json
 #import requests
 
@@ -179,8 +179,6 @@ if st.session_state.selected_section != "Description" and st.session_state.selec
                     """, unsafe_allow_html=True)
             except Exception as e:
                 update_logs("An error occurred during prediction.")
-                st.error(f"Error: {str(e)}")
-                st.code(traceback.format_exc())  # show full stack trace in app
 
 ### H-1B SALARIES DASHBOARD SECTION ###
 if st.session_state.selected_section == "H-1B Salaries Report":

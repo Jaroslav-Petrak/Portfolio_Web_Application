@@ -146,7 +146,7 @@ if st.session_state.selected_section != "Description" and st.session_state.selec
                     </div>""", unsafe_allow_html=True)
             try:
                 update_logs("Getting the ML Model...")
-                model = tf.keras.models.load_model(".\salary_predictor_for_fair_compensation\Salary_Predictor_for_Fair_Compensation_TensorFlow.keras")
+                model = tf.keras.models.load_model("./salary_predictor_for_fair_compensation/Salary_Predictor_for_Fair_Compensation_TensorFlow.keras")
                 #scoring_uri = st.secrets["scoring_uri"]
                 update_logs("Preprocessing data...")
                 df, inference_X = preprocessing_pipeline(df = edited_input_data, mode = "inference")

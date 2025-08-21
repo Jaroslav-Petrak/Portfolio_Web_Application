@@ -178,9 +178,7 @@ if st.session_state.selected_section != "Description" and st.session_state.selec
                     """, unsafe_allow_html=True)
             except Exception:
                 update_logs("An error occurred during prediction.")
-                st.text(model)
-                st.text(prediction_value)
-                st.text(clean_prediction)
+                st.error(f"Error: {str(e)}")
 
 ### H-1B SALARIES DASHBOARD SECTION ###
 if st.session_state.selected_section == "H-1B Salaries Report":

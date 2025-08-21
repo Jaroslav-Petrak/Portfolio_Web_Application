@@ -2,9 +2,11 @@ import streamlit as st
 import pandas as pd
 import datetime
 import time
-import json
 import streamlit.components.v1 as components
-import requests
+from salary_predictor_for_fair_compensation.salary_predictor_preprocessor import preprocessing_pipeline
+import tensorflow as tf
+#import json
+#import requests
 
 ### CONFIGURATION OF THE TITLE FONTS ###
 st.markdown("""<style>
@@ -131,7 +133,8 @@ if st.session_state.selected_section != "Description" and st.session_state.selec
                                     "SUBMIT DATE": selected_submission_date.strftime("%#m/%#d/%Y"),
                                     "START DATE": selected_start_date.strftime("%#m/%#d/%Y"),
                                     "BRANCH": selected_value_branch}
-            edited_input_data = json.dumps([data_from_user_input], indent=2)
+            edited_input_data = pd.DataFrame([data_from_user_input])
+            #edited_input_data = json.dumps([data_from_user_input], indent=2)
             log_placeholder = st.empty()
             def update_logs(new_message):
                 log_placeholder.markdown(
@@ -141,16 +144,20 @@ if st.session_state.selected_section != "Description" and st.session_state.selec
                         </pre>
                     </div>""", unsafe_allow_html=True)
             try:
-                update_logs("Getting to the endpoint of the ML Model...")
-                scoring_uri = st.secrets["scoring_uri"]
+                update_logs("Getting the ML Model...")
+                model = tf.keras.models.load_model(".\salary_predictor_for_fair_compensation\Salary_Predictor_for_Fair_Compensation_TensorFlow.keras")
+                #scoring_uri = st.secrets["scoring_uri"]
+                update_logs("Preprocessing data...")
+                df, inference_X = preprocessing_pipeline(df = edited_input_data, mode = "inference")
                 update_logs("Sending data for prediction...")
-                headers = {"Content-Type": "application/json"}
-                response = requests.post(scoring_uri, data=edited_input_data, headers=headers)
-                response.raise_for_status()
-                parsed_json_prediction = json.loads(response.text) 
-                parsed_json_prediction = json.loads(parsed_json_prediction) 
-                prediction_value = parsed_json_prediction["result"][0][0]
+                prediction_value = model.predict(inference_X)
                 clean_prediction = int(prediction_value)
+                #headers = {"Content-Type": "application/json"}
+                #response = requests.post(scoring_uri, data=edited_input_data, headers=headers)
+                #response.raise_for_status()
+                #parsed_json_prediction = json.loads(response.text) 
+                #parsed_json_prediction = json.loads(parsed_json_prediction) 
+                #prediction_value = parsed_json_prediction["result"][0][0]
                 update_logs("Prediction calculated successfully.")
                 st.text("")
                 st.text("")

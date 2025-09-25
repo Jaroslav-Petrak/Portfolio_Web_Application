@@ -38,16 +38,17 @@ st.markdown(f"""
 
 main_page = st.Page(page="web_pages/main_page.py", title="Main Page")
 contact = st.Page(page="web_pages/contact.py", title="Contact")
+game_recommender = st.Page(page = "web_pages/game_recommender.py", title = "Game Recommender")
+
 salary_predictor_and_report = st.Page(page="web_pages/salary_predictor_and_report.py", title="Salary Predictor & Report")
 versatile_text_classifier = st.Page(page="web_pages/versatile_text_classifier.py", title = "Versatile Text Classifier")
 time_series_forecaster = st.Page(page = "web_pages/time_series_forecaster.py", title = "Time Series Forecaster")
-airbnb_etl_database_report_and_recommendation_system = st.Page(page = "web_pages/airbnb_recommender_and_report.py", title = "Bangkok AirBnB - IN DEV")
 
 pg = st.navigation({
     "NAVIGATION": [main_page, contact],
-    "Portfolio Projects": [salary_predictor_and_report, 
+    "Portfolio Projects": [game_recommender,
+                           salary_predictor_and_report, 
                            versatile_text_classifier,
-                           time_series_forecaster,
-                           #airbnb_etl_database_report_and_recommendation_system
+                           time_series_forecaster
                            ]})
 pg.run()

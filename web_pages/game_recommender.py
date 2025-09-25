@@ -3,7 +3,7 @@ import psycopg2
 import pandas as pd
 import html
 
-st.title("Board Game Searcher & Recommender")
+st.title("🎲 Board Game Searcher & Recommender")
 
 # --- Inject CSS to make labels white and hide slider min/max numbers ---
 st.markdown(

@@ -27,7 +27,7 @@ st.markdown(
 
 CONN_ID = st.secrets["conn_id"]
 
-# --- Function to get a live connection ---
+# --- Database connection ---
 def get_connection():
     global conn
     try:
@@ -38,39 +38,83 @@ def get_connection():
     conn = psycopg2.connect(dsn=CONN_ID)
     return conn
 
-# --- Fetch games from DB with pagination ---
-def fetch_games(search_query=None, limit=50, page=1):
+# --- Fetch games dynamically ---
+def fetch_games(filters, limit=50, page=1):
     offset = (page - 1) * limit
     conn = get_connection()
+    conditions = []
+    params = []
+
+    if filters.get("search"):
+        conditions.append("name ILIKE %s")
+        params.append(f"%{filters['search']}%")
+
+    conditions.append("playingtime BETWEEN %s AND %s")
+    params.extend([filters["time_min"], filters["time_max"]])
+
+    conditions.append("minplayers <= %s AND maxplayers >= %s")
+    params.extend([filters["players_max"], filters["players_min"]])
+
+    if filters.get("categories"):
+        conditions.append(
+            "EXISTS (SELECT 1 FROM unnest(string_to_array(categories, ',')) AS cat WHERE cat = ANY(%s))"
+        )
+        params.append(filters["categories"])
+
+    if filters.get("mechanics"):
+        conditions.append(
+            "EXISTS (SELECT 1 FROM unnest(string_to_array(mechanics, ',')) AS mech WHERE mech = ANY(%s))"
+        )
+        params.append(filters["mechanics"])
+
+    where_clause = "WHERE " + " AND ".join(conditions) if conditions else ""
+    query = f"SELECT * FROM board_games {where_clause} ORDER BY name LIMIT %s OFFSET %s;"
+    params.extend([limit, offset])
+
     with conn.cursor() as cursor:
         conn.rollback()
-        if search_query:
-            cursor.execute(
-                "SELECT * FROM board_games WHERE name ILIKE %s ORDER BY name LIMIT %s OFFSET %s;",
-                (f"%{search_query}%", limit, offset)
-            )
-        else:
-            cursor.execute(
-                "SELECT * FROM board_games ORDER BY name LIMIT %s OFFSET %s;",
-                (limit, offset)
-            )
+        cursor.execute(query, params)
         columns = [desc[0] for desc in cursor.description]
         data = cursor.fetchall()
     return pd.DataFrame(data, columns=columns)
 
-# --- Get total count for pagination ---
-def get_total_count(search_query=None):
+# --- Get total count dynamically ---
+def get_total_count(filters):
     conn = get_connection()
+    conditions = []
+    params = []
+
+    if filters.get("search"):
+        conditions.append("name ILIKE %s")
+        params.append(f"%{filters['search']}%")
+
+    conditions.append("playingtime BETWEEN %s AND %s")
+    params.extend([filters["time_min"], filters["time_max"]])
+
+    conditions.append("minplayers <= %s AND maxplayers >= %s")
+    params.extend([filters["players_max"], filters["players_min"]])
+
+    if filters.get("categories"):
+        conditions.append(
+            "EXISTS (SELECT 1 FROM unnest(string_to_array(categories, ',')) AS cat WHERE cat = ANY(%s))"
+        )
+        params.append(filters["categories"])
+
+    if filters.get("mechanics"):
+        conditions.append(
+            "EXISTS (SELECT 1 FROM unnest(string_to_array(mechanics, ',')) AS mech WHERE mech = ANY(%s))"
+        )
+        params.append(filters["mechanics"])
+
+    where_clause = "WHERE " + " AND ".join(conditions) if conditions else ""
+    query = f"SELECT COUNT(*) FROM board_games {where_clause};"
     with conn.cursor() as cursor:
         conn.rollback()
-        if search_query:
-            cursor.execute("SELECT COUNT(*) FROM board_games WHERE name ILIKE %s;", (f"%{search_query}%",))
-        else:
-            cursor.execute("SELECT COUNT(*) FROM board_games;")
+        cursor.execute(query, params)
         total = cursor.fetchone()[0]
     return total
 
-# --- Fetch recommendations including image URL ---
+# --- Fetch recommendations ---
 def fetch_recommendations(game_id, limit=5):
     conn = get_connection()
     with conn.cursor() as cursor:
@@ -88,7 +132,7 @@ def fetch_recommendations(game_id, limit=5):
         recs = cursor.fetchall()
     return recs
 
-# --- Fetch all unique categories ---
+# --- Fetch all unique categories and mechanics ---
 def get_all_categories():
     conn = get_connection()
     with conn.cursor() as cursor:
@@ -97,7 +141,6 @@ def get_all_categories():
         rows = cursor.fetchall()
     return sorted(set(r[0].strip() for r in rows if r[0]))
 
-# --- Fetch all unique mechanics ---
 def get_all_mechanics():
     conn = get_connection()
     with conn.cursor() as cursor:
@@ -106,77 +149,57 @@ def get_all_mechanics():
         rows = cursor.fetchall()
     return sorted(set(r[0].strip() for r in rows if r[0]))
 
+# --- UI Filters ---
+search_query = st.text_input("🤔 Search for a game...", placeholder="Type a board game name...")
+
+filter_col1, gap_col, filter_col2 = st.columns([4, 0.1, 4])
+with filter_col1:
+    selected_time = st.slider("⏱️ Playing Time (minutes)", 0, 500, (0, 500))
+    all_categories = get_all_categories()
+    selected_categories = st.multiselect("📂 Categories", options=all_categories)
+with filter_col2:
+    selected_players = st.slider("👥 Number of Players", 1, 20, (1, 20))
+    all_mechanics = get_all_mechanics()
+    selected_mechanics = st.multiselect("⚙️ Mechanics", options=all_mechanics)
+
+# --- Prepare filters ---
+filters = {
+    "search": search_query,
+    "time_min": selected_time[0],
+    "time_max": selected_time[1],
+    "players_min": selected_players[0],
+    "players_max": selected_players[1],
+    "categories": selected_categories if selected_categories else None,
+    "mechanics": selected_mechanics if selected_mechanics else None,
+}
+
+# --- Session state: reset page if filters changed ---
+if "last_filters" not in st.session_state:
+    st.session_state.last_filters = filters
+    st.session_state.page = 1
+
+if filters != st.session_state.last_filters:
+    st.session_state.page = 1
+    st.session_state.last_filters = filters
+
 # --- Pagination setup ---
 PAGE_SIZE = 50
-total_count = get_total_count()
+total_count = get_total_count(filters)
 total_pages = max(1, (total_count // PAGE_SIZE) + (1 if total_count % PAGE_SIZE > 0 else 0))
+current_page = min(st.session_state.page, total_pages)
 
-# --- Search bar and page number ---
-col1, col2 = st.columns([8, 1])
-with col1:
-    search_query = st.text_input("🤔 Search for a game...", placeholder="Type a board game name...")
-with col2:
-    page = st.number_input("📄 Page", min_value=1, max_value=total_pages, value=1, step=1, format="%d")
-
-# --- Filters arranged 2x2 with a small gap column ---
-filter_col1, gap_col, filter_col2 = st.columns([4, 0.1, 4])
-
-with filter_col1:
-    # Playing time filter
-    selected_time = st.slider(
-        "⏱️ Playing Time (minutes)",
-        min_value=0,
-        max_value=500,
-        value=(0, 500)
-    )
-
-    # Categories filter
-    all_categories = get_all_categories()
-    selected_categories = st.multiselect(
-        "📂 Categories", options=all_categories
-    )
-
-with filter_col2:
-    # Players filter
-    selected_players = st.slider(
-        "👥 Number of Players",
-        min_value=1,
-        max_value=20,
-        value=(1, 20)
-    )
-
-    # Mechanics filter
-    all_mechanics = get_all_mechanics()
-    selected_mechanics = st.multiselect(
-        "⚙️ Mechanics", options=all_mechanics
-    )
+# --- Page input ---
+page = st.number_input("📄 Page", min_value=1, max_value=total_pages, value=current_page, step=1, format="%d", key="page")
 
 st.divider()
 st.title("🎲 Game Results")
 st.divider()
 
-# --- Fetch data for current page ---
-df = fetch_games(search_query, limit=PAGE_SIZE, page=page)
-
-# Filter out invalid image URLs
+# --- Fetch current page games ---
+df = fetch_games(filters, limit=PAGE_SIZE, page=page)
 df = df[df['image_url'].notnull() & df['image_url'].str.startswith("http")]
 
-# --- Apply filters ---
-df = df[df['playingtime'].notnull()]
-df = df[(df['playingtime'] >= selected_time[0]) & (df['playingtime'] <= selected_time[1])]
-
-df = df[df['minplayers'].notnull() & df['maxplayers'].notnull()]
-df = df[(df['minplayers'] <= selected_players[1]) & (df['maxplayers'] >= selected_players[0])]
-
-if selected_categories:
-    df = df[df['categories'].notnull()]
-    df = df[df['categories'].apply(lambda x: any(cat.strip() in selected_categories for cat in x.split(",")))]
-
-if selected_mechanics:
-    df = df[df['mechanics'].notnull()]
-    df = df[df['mechanics'].apply(lambda x: any(mech.strip() in selected_mechanics for mech in x.split(",")))]
-
-# --- Display cards (Improved design, fixed font and ellipsis) ---
+# --- Display cards ---
 cards_per_row = 5
 for start in range(0, len(df), cards_per_row):
     row_block = df.iloc[start:start+cards_per_row]
@@ -185,34 +208,24 @@ for start in range(0, len(df), cards_per_row):
         with cols[i]:
             minplayers = int(row['minplayers']) if pd.notnull(row['minplayers']) else None
             maxplayers = int(row['maxplayers']) if pd.notnull(row['maxplayers']) else None
-
-            if minplayers is None and maxplayers is None:
-                players_text = "Unknown"
-            elif minplayers is not None and maxplayers is not None:
-                players_text = f"{minplayers}" if minplayers == maxplayers else f"{minplayers} - {maxplayers}"
-            elif minplayers is not None:
-                players_text = f"{minplayers}"
-            else:
-                players_text = f"{maxplayers}"
-
+            players_text = (
+                "Unknown" if minplayers is None and maxplayers is None else
+                f"{minplayers}" if minplayers == maxplayers else
+                f"{minplayers} - {maxplayers}"
+            )
             playingtime = f"{int(row['playingtime'])} mins" if pd.notnull(row['playingtime']) else "Unknown"
 
-            recs = fetch_recommendations(row['id'], limit=4)  # ensure 4 recommendations
+            # --- Recommended games block ---
+            recs = fetch_recommendations(row['id'], limit=4)
             rec_images = "".join(
-                f"""
-                <a href="{rec_url}" target="_blank" style="
-                    display:block; 
-                    min-width:120px;
-                    margin-bottom:10px; 
-                    color:#ff7f50; 
-                    text-decoration:none; 
-                    font-weight:bold;
-                ">
-                    <img src="{rec_img}" alt="{html.escape(rec_name, quote=True)}" title="{html.escape(rec_name, quote=True)}"
-                        style="width:120px; height:80px; object-fit:cover; border-radius:5px; border:1px solid #ccc;">
-                    <span style="display:block; text-align:left; font-size:0.85em; color:#ff7f50; font-weight:bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{html.escape(rec_name)}</span>
-                </a>
-                """ for rec_id, rec_name, rec_url, rec_img in recs if rec_img
+                f'<div style="text-align:center; margin-bottom:10px;">'
+                f'<a href="{rec_url}" target="_blank" style="display:block; text-decoration:none;">'
+                f'<img src="{rec_img}" alt="{html.escape(rec_name, quote=True)}" title="{html.escape(rec_name, quote=True)}" '
+                f'style="width:100%; height:150px; object-fit:cover; border-radius:5px; border:1px solid #ccc;">'
+                f'<span style="display:block; text-align:center; font-size:0.85em; color:#ff7f50; font-weight:bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">'
+                f'{html.escape(rec_name)}</span>'
+                f'</a></div>'
+                for rec_id, rec_name, rec_url, rec_img in recs if rec_img
             ) if recs else "<p>No recommendations available.</p>"
 
             st.markdown(
@@ -226,7 +239,7 @@ for start in range(0, len(df), cards_per_row):
                     text-align:center;
                     transition: transform 0.2s, box-shadow 0.2s;
                     color:#333;
-                " onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 8px 20px rgba(0,0,0,0.25)';" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)';">
+                ">
                     <a href="{row['url']}" target="_blank" style="text-decoration:none;">
                         <img src="{row['image_url']}" alt="{row['name']}" 
                             style="width:100%; height:250px; object-fit:cover; border-radius:15px;">
@@ -262,8 +275,9 @@ for start in range(0, len(df), cards_per_row):
                             🔗 Check out this game!
                         </a></p>
                         <hr>
-                        <p><b>Recommended Games:</b></p>
-                        <div style="display:flex; flex-direction:column; gap:10px; padding:5px;">{rec_images}</div>
+                        <p style="font-size: clamp(0.8em, 2.5vw, 1.5em); font-weight:bold; margin:5px 0;text-align: center;">Recommended Games</p>
+                        <p></p>
+                        <div style="display:flex; flex-direction:column; gap:10px; width:100%;">{rec_images}</div>
                     </details>
                 </div>
                 """,

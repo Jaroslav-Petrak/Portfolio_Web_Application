@@ -76,6 +76,7 @@ def fetch_games(filters, limit=50, page=1):
         cursor.execute(query, params)
         columns = [desc[0] for desc in cursor.description]
         data = cursor.fetchall()
+
     return pd.DataFrame(data, columns=columns)
 
 # --- Get total count dynamically ---
@@ -108,10 +109,12 @@ def get_total_count(filters):
 
     where_clause = "WHERE " + " AND ".join(conditions) if conditions else ""
     query = f"SELECT COUNT(*) FROM board_games {where_clause};"
+
     with conn.cursor() as cursor:
         conn.rollback()
         cursor.execute(query, params)
         total = cursor.fetchone()[0]
+
     return total
 
 # --- Fetch recommendations ---
@@ -157,6 +160,7 @@ with filter_col1:
     selected_time = st.slider("⏱️ Playing Time (minutes)", 0, 500, (0, 500))
     all_categories = get_all_categories()
     selected_categories = st.multiselect("📂 Categories", options=all_categories)
+
 with filter_col2:
     selected_players = st.slider("👥 Number of Players", 1, 20, (1, 20))
     all_mechanics = get_all_mechanics()
@@ -189,7 +193,15 @@ total_pages = max(1, (total_count // PAGE_SIZE) + (1 if total_count % PAGE_SIZE 
 current_page = min(st.session_state.page, total_pages)
 
 # --- Page input ---
-page = st.number_input("📄 Page", min_value=1, max_value=total_pages, value=current_page, step=1, format="%d", key="page")
+page = st.number_input(
+    "📄 Page", 
+    min_value=1, 
+    max_value=total_pages, 
+    value=current_page, 
+    step=1, 
+    format="%d", 
+    key="page"
+)
 
 st.divider()
 st.title("🎲 Game Results")
@@ -242,7 +254,7 @@ for start in range(0, len(df), cards_per_row):
                 ">
                     <a href="{row['url']}" target="_blank" style="text-decoration:none;">
                         <img src="{row['image_url']}" alt="{row['name']}" 
-                            style="width:100%; height:250px; object-fit:cover; border-radius:15px;">
+                             style="width:100%; height:250px; object-fit:cover; border-radius:15px;">
                     </a>
                     <details style="padding:10px; text-align:left;">
                         <summary style="
@@ -262,22 +274,17 @@ for start in range(0, len(df), cards_per_row):
                         <p><b>Categories:</b> {row['categories']}</p>
                         <p><b>Mechanics:</b> {row['mechanics']}</p>
                         <p><a href="{row['url']}" target="_blank" style="
-                            display:block; 
-                            width:100%;
-                            padding:10px 0; 
-                            background-color:#ff7f50; 
-                            color:white; 
-                            border-radius:5px; 
-                            text-decoration:none;
-                            font-weight:bold;
-                            text-align:center;
-                        ">
+                            display:block; width:100%; padding:10px 0; background-color:#ff7f50; color:white; 
+                            border-radius:5px; text-decoration:none; font-weight:bold; text-align:center;">
                             🔗 Check out this game!
                         </a></p>
                         <hr>
-                        <p style="font-size: clamp(0.8em, 2.5vw, 1.5em); font-weight:bold; margin:5px 0;text-align: center;">Recommended Games</p>
-                        <p></p>
-                        <div style="display:flex; flex-direction:column; gap:10px; width:100%;">{rec_images}</div>
+                        <p style="font-size: clamp(0.8em, 2.5vw, 1.5em); font-weight:bold; margin:5px 0;text-align:center;">
+                            Recommended Games
+                        </p>
+                        <div style="display:flex; flex-direction:column; gap:10px; width:100%;">
+                            {rec_images}
+                        </div>
                     </details>
                 </div>
                 """,

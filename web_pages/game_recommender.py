@@ -157,7 +157,7 @@ search_query = st.text_input("🤔 Search for a game...", placeholder="Type a bo
 
 filter_col1, gap_col, filter_col2 = st.columns([4, 0.1, 4])
 with filter_col1:
-    selected_time = st.slider("⏱️ Playing Time (minutes)", 0, 500, (0, 500))
+    selected_time = st.slider("⏱️ Playing Time (Minutes)", 0, 500, (0, 500))
     all_categories = get_all_categories()
     selected_categories = st.multiselect("📂 Categories", options=all_categories)
 

@@ -282,6 +282,7 @@ for start in range(0, len(df), cards_per_row):
                         <p style="font-size: clamp(0.8em, 2.5vw, 1.5em); font-weight:bold; margin:5px 0;text-align:center;">Recommended Games</p>
                         <p></p>
                         <p></p>
+                        <p></p>
                         <div style="display:flex; flex-direction:column; gap:10px; width:100%;">
                             {rec_images}
                         </div>

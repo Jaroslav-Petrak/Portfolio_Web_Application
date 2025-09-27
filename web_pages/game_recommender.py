@@ -222,5 +222,4 @@ for start in range(0, len(df), cards_per_row):
                         </div>
                     </details>
                 </div>
-                """,
-                unsafe_allow_html=True)
+                """, unsafe_allow_html=True)

@@ -1,12 +1,10 @@
 import streamlit as st
 import base64
-
 st.set_page_config(layout="wide")
 def get_base64_image(image_path):
     with open(image_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode()
 img_base64 = get_base64_image("images/background.png")
-
 st.markdown(f"""
     <style>
     .stApp {{
@@ -33,22 +31,19 @@ st.markdown(f"""
     header[data-testid="stHeader"] * {{color: #ffffff !important;}}
 
     footer {{visibility: hidden;}}
-    </style>
-""", unsafe_allow_html=True)
-
+    </style>""", unsafe_allow_html=True)
 main_page = st.Page(page="web_pages/main_page.py", title="Main Page")
 contact = st.Page(page="web_pages/contact.py", title="Contact")
-game_recommender = st.Page(page = "web_pages/game_recommender.py", title = "Game Recommender")
-
+game_recommender = st.Page(page = "web_pages/game_recommender.py", title = "Game Recommender")                                  # Added
 salary_predictor_and_report = st.Page(page="web_pages/salary_predictor_and_report.py", title="Salary Predictor & Report")
 versatile_text_classifier = st.Page(page="web_pages/versatile_text_classifier.py", title = "Versatile Text Classifier")
 time_series_forecaster = st.Page(page = "web_pages/time_series_forecaster.py", title = "Time Series Forecaster")
-
 pg = st.navigation({
     "NAVIGATION": [main_page, contact],
-    "Portfolio Projects": [game_recommender,
+    "Portfolio Projects": [game_recommender,                                                                                    # Added
                            salary_predictor_and_report, 
                            versatile_text_classifier,
                            time_series_forecaster
                            ]})
 pg.run()
+

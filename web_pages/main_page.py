@@ -97,17 +97,17 @@ if st.session_state.selected_section != "Experience" and st.session_state.select
         st.title("Education")
         st.markdown("""
                     <div style='color: white;'>
-                    • <a href="https://www.muvs.cvut.cz/en/prospective-students/master-of-science/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">Czech Technical University in Prague (CTU)</a> - Project Management of Innovations (Ing./MSc.) - Current average A
+                    • <a href="https://www.muvs.cvut.cz/en/prospective-students/master-of-science/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">Czech Technical University in Prague (CTU)</a> - Project Management of Innovations (Ing.) - Expected graduation 2026/02
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • <a href="https://www.opit.com/courses/computer-science-master/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">Open Institute of Technology (OPIT)</a> - Applied Data Science & AI (MSc.) - Total average 99%
+                    • <a href="https://www.opit.com/courses/computer-science-master/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">Open Institute of Technology (OPIT)</a> - Applied Data Science & AI (MSc.) - Graduated
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • <a href="https://www.muvs.cvut.cz/en/prospective-students/prospective-bachelor/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">Czech Technical University in Prague (CTU)</a> - Economics & Management (Bc./BSc.) - Graduated with distinction
+                    • <a href="https://www.muvs.cvut.cz/en/prospective-students/prospective-bachelor/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">Czech Technical University in Prague (CTU)</a> - Economics & Management (Bc.) - Graduated with distinction
                     </div>
                     """, unsafe_allow_html=True)
     

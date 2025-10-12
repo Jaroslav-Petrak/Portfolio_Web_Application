@@ -20,7 +20,7 @@ st.markdown("""
 
 
 
-st.markdown(f'<div class="title-font">JAROSLAV PETRÁK</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="title-font">BC. JAROSLAV PETRÁK, MSC.</div>', unsafe_allow_html=True)
 st.markdown('<div class="subtitle-font">Data Analytics Engineer</div>', unsafe_allow_html=True)
 
 

@@ -44,7 +44,7 @@ def img_to_base64(img_path):
 with linkedin_icon_part:
     linked_icon_base64 = img_to_base64("images/linkedin_icon.png")
     html_code_linkedin_icon = f"""
-    <a href="https://www.linkedin.com/in/bc-jaroslav-petr%C3%A1k-7b9704264/" target="_blank" style="display:inline-block;">
+    <a href="https://www.linkedin.com/in/jaroslav-petr%C3%A1k-msc-7b9704264/" target="_blank" style="display:inline-block;">
         <img src="data:image/png;base64,{linked_icon_base64}" width="100" style="vertical-align:middle;">
     </a>
     """

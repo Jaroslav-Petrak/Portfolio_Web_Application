@@ -153,14 +153,12 @@ filters = {
     "players_min": selected_players[0],
     "players_max": selected_players[1],
     "categories": selected_categories if selected_categories else None,
-    "mechanics": selected_mechanics if selected_mechanics else None
-}
+    "mechanics": selected_mechanics if selected_mechanics else None}
 
 if "page" not in st.session_state:
     st.session_state.page = 1
 if "last_filters" not in st.session_state:
     st.session_state.last_filters = {}
-
 if filters != st.session_state.last_filters:
     st.session_state.page = 1
     st.session_state.last_filters = filters
@@ -170,15 +168,8 @@ total_count = get_total_count(filters)
 total_pages = max(1, (total_count // PAGE_SIZE) + (1 if total_count % PAGE_SIZE > 0 else 0))
 current_page = min(st.session_state.page, total_pages)
 
-page = st.number_input(
-    "📄 Page",
-    min_value=1,
-    max_value=total_pages,
-    value=current_page,
-    step=1,
-    format="%d",
-    key="page"
-)
+st.number_input("📄 Page", min_value=1, max_value=total_pages, step=1, format="%d", key="page")
+page = st.session_state.page
 
 st.divider()
 st.title("🎲 Game Results")

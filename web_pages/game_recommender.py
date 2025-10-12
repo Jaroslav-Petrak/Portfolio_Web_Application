@@ -167,18 +167,15 @@ PAGE_SIZE = 50
 total_count = get_total_count(filters)
 total_pages = max(1, (total_count // PAGE_SIZE) + (1 if total_count % PAGE_SIZE > 0 else 0))
 current_page = min(st.session_state.page, total_pages)
-
 st.number_input("📄 Page", min_value=1, max_value=total_pages, step=1, format="%d", key="page")
 page = st.session_state.page
-
 st.divider()
 st.title("🎲 Game Results")
 st.divider()
-
 df = fetch_games(filters, limit=PAGE_SIZE, page=page)
 df = df[df['image_url'].notnull() & df['image_url'].str.startswith("http")]
-
 cards_per_row = 5
+
 for start in range(0, len(df), cards_per_row):
     row_block = df.iloc[start:start + cards_per_row]
     cols = st.columns(cards_per_row)

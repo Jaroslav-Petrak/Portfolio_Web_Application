@@ -21,7 +21,7 @@ st.markdown("""
 
 
 st.markdown(f'<div class="title-font">JAROSLAV PETRÁK</div>', unsafe_allow_html=True)
-st.markdown('<div class="subtitle-font">Data Scientist & Analyst</div>', unsafe_allow_html=True)
+st.markdown('<div class="subtitle-font">Data Analytics Engineer</div>', unsafe_allow_html=True)
 
 
 st.markdown("""
@@ -82,8 +82,7 @@ if st.session_state.selected_section != "Experience" and st.session_state.select
         st.title("Overview")
         st.markdown("""
                     <div style='color: white;'>
-                    Experienced Data Analyst with an educational background in Data Science & AI. Skilled in leveraging SQL, Excel & Power BI to drive insightful data analytics projects, particularly in HR & quality assurance domains. Proficient in developing & deploying machine learning models using popular libraries such as TensorFlow, XGBoost, CatBoost, LightGBM & Scikit-Learn. Experienced in deploying ML models on Azure Machine Learning & adept at data engineering tasks utilizing ETL tools like Azure Data Factory & Pentaho.
-                    </div>
+                    Experienced Data Analyst with 2+ years of experience in HR and quality assurance. Skilled in building end-to-end data solutions — from ETL/ELT pipelines (Airflow, Azure Data Factory, Fivetran, Pentaho, Power Automate) and database management in SQL to interactive dashboards in Power BI and Looker Studio. Combining strong analytical and machine learning skills to create predictive insights that enhance reporting and decision-making.                    </div>
                     """, unsafe_allow_html=True)
     ### PICTURE PART OF THE OVERVIEW SECTION ###    
     with main_content_overview_picture_part:
@@ -151,35 +150,31 @@ if st.session_state.selected_section == "Experience":
     with main_content_position_1_text_part:        
         st.markdown("""
                     <div style='color: white; font-size: 20px; font-weight: bold;'>
-                        HR Controlling Data Analyst – <a href="https://www.cetin.cz/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">CETIN</a> (2024/04 – Now)
+                        HR Data Analyst – <a href="https://www.cetin.cz/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">CETIN</a> (2024/04 – Now)
                     </div>
                     """, unsafe_allow_html=True)
 
         st.markdown("""
                     <div style='color: white;'>
-                    • Development of data-driven reporting on training compliance, remuneration, benefits, equality, diversity & other HR metrics, achieving near-perfect legislative compliance, optimizing & prioritizing high-demand benefits, improving gender inclusivity for women by 6%
+                    • Light-weight ETL with Power Automate for populating data for reports
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • ML forecasting of HR cost metrics for planning purposes, resulting in 5% MAPE while forecasting of the training costs
+                    • Power BI reports for C-level management oriented to staffing costs, vacancies, recruitment & training metrics leading to minimization of waste, optimalization & fulfillment of legislative requirements
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • Creation of online Power BI course & led 8 Excel training sessions, enhancing internal analytical capabilities & reducing dependency on external data support of roughly 90 employees
+                    • ML models for time series forecasting (ARIMA, SARIMA, TensorFlow)
                     </div>
                     """, unsafe_allow_html=True)    
         st.markdown("""
                     <div style='color: white;'>
-                    • Development of 2 Power Apps to streamline the employee benefits selection process, enabling 3,000 employees to make their selections efficiently
+                    • Admin of SAP Success Factors & internal LMS
                     </div>
                     """, unsafe_allow_html=True)
-        st.markdown("""
-                    <div style='color: white;'>
-                    • Serving as system administrator for SAP SuccessFactors and the internal LMS, including development of customized reports within both platforms
-                    </div>
-                    """, unsafe_allow_html=True)          
+        
     ### PICTURE PART OF THE HR CONTROLLING DATA ANALYST SECTION ###    
     with main_content_position_1_picture_part:
         st.text("")    
@@ -198,17 +193,12 @@ if st.session_state.selected_section == "Experience":
 
         st.markdown("""
                     <div style='color: white;'>
-                    • Reporting about service quality assurance, contributing to maintaining lead times below thresholds specified in B2B contracts, resulting in performance 2-5% above the threshold on average
+                    • Excel & Power BI reports for keeping SLA metrics above thresholds to minimize penalties & increase customers’ satisfaction
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • Monitoring projects related to 7 report migrations, 1 data migration
-                    </div>
-                    """, unsafe_allow_html=True)   
-        st.markdown("""
-                    <div style='color: white;'>
-                    • Communication of feature engineering needs to the Data Engineers, ensuring swift delivery of necessary variables for reporting
+                    • Project coordination & communication regarding report migrations as well as evolving data engineering requirements regarding feature engineering
                     </div>
                     """, unsafe_allow_html=True)   
     ### PICTURE PART OF THE DATA ANALYST SUPPORT SECTION ###    
@@ -255,17 +245,17 @@ if st.session_state.selected_section == "Experience":
 
         st.markdown("""
                     <div style='color: white;'>
-                    • Analysis of competitors, deriving insights about prices, quality, events, services from more than 20 local hotel providers
+                    • Analysis of competition - Monitoring prices & other parameters of competition’s hotels
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • Tracking voucher status in the database to estimate expected costs from active vouchers & savings from expired ones 
+                    • Reporting of voucher consumption - Quantification of saving of costs from expired vouchers
                     </div>
                     """, unsafe_allow_html=True)   
         st.markdown("""
                     <div style='color: white;'>
-                    • Editing of HTML codes for the modification of email marketing content
+                    • HTML editing of email content for email marketing
                     </div>
                     """, unsafe_allow_html=True)   
     ### PICTURE PART OF THE MARKETING TRAINEE SECTION ###    
@@ -282,27 +272,32 @@ if st.session_state.selected_section == "Skills & Tools":
         st.title("Skills")
         st.markdown("""
                     <div style='color: white;'>
-                    • Report development
+                    • Data Visualization
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • ML model development & deployment
+                    • ETL/ELT Development
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • Presentation
+                    • Database Administration
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • Project management
+                    • Coding
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • Python website development
+                    • ML Model Development & Deployment
+                    </div>
+                    """, unsafe_allow_html=True)
+        st.markdown("""
+                    <div style='color: white;'>
+                    • Project Management
                     </div>
                     """, unsafe_allow_html=True)
     ### PICTURE PART OF THE SKILLS SECTION ###    
@@ -334,6 +329,11 @@ if st.session_state.selected_section == "Skills & Tools":
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
+                    • <b>HTML</b>
+                    </div>
+                    """, unsafe_allow_html=True)
+        st.markdown("""
+                    <div style='color: white;'>
                     • <b>Power fx</b>
                     </div>
                     """, unsafe_allow_html=True)
@@ -361,7 +361,7 @@ if st.session_state.selected_section == "Skills & Tools":
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • <b>Databases</b> - Azure SQL, MS SQL, MySQL, Snowflake, MS Access
+                    • <b>Databases</b> - Azure SQL, MS SQL, MySQL, Snowflake, MS Access, Supabase, Neondb
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
@@ -371,7 +371,7 @@ if st.session_state.selected_section == "Skills & Tools":
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • <b>ETL tools</b> - Azure Data Factory, Pentaho 
+                    • <b>ETL/ELT tools</b> - Apache Airflow, Azure Data Factory, Pentaho, Power Automate, Fivetran
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
@@ -386,19 +386,14 @@ if st.session_state.selected_section == "Skills & Tools":
                     """, unsafe_allow_html=True)   
         st.markdown("""
                     <div style='color: white;'>
-                    • <b>Project management</b> - Trello
+                    • <b>Project management</b> - Trello, ClickUp
                     </div>
                     """, unsafe_allow_html=True) 
         st.markdown("""
                     <div style='color: white;'>
                     • <b>App development tools</b> - MS Power Apps
                     </div>
-                    """, unsafe_allow_html=True)  
-        st.markdown("""
-                    <div style='color: white;'>
-                    • <b>Automation</b> - Azure Automation, MS Power Automate
-                    </div>
-                    """, unsafe_allow_html=True)     
+                    """, unsafe_allow_html=True)      
     ### PICTURE PART OF THE TOOLS SECTION ###    
     with main_content_tools_picture_part:
         st.text("")
@@ -413,12 +408,12 @@ if st.session_state.selected_section == "Certs & Courses":
         st.title("Certifications")
         st.markdown("""
                     <div style='color: white;'>
-                    • <a href="https://www.linkedin.com/in/bc-jaroslav-petr%C3%A1k-7b9704264/details/certifications/1749917664315/single-media-viewer/?profileId=ACoAAEDjc30BZnSbgPlhIyAibehQFfGOTLWfijI" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">English</a> - CAE C1
+                    • <a href="https://www.linkedin.com/in/jaroslav-petr%C3%A1k-msc-7b9704264/details/certifications/1749917664315/single-media-viewer/?profileId=ACoAAEDjc30BZnSbgPlhIyAibehQFfGOTLWfijI" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">English</a> - CAE C1
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
-                    • <a href="https://www.linkedin.com/in/bc-jaroslav-petr%C3%A1k-7b9704264/details/certifications/1749919080218/single-media-viewer/?profileId=ACoAAEDjc30BZnSbgPlhIyAibehQFfGOTLWfijI" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">French</a> - DELF B1
+                    • <a href="https://www.linkedin.com/in/jaroslav-petr%C3%A1k-msc-7b9704264/details/certifications/1749919080218/single-media-viewer/?profileId=ACoAAEDjc30BZnSbgPlhIyAibehQFfGOTLWfijI" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">French</a> - DELF B1
                     </div>
                     """, unsafe_allow_html=True)
         st.markdown("""
@@ -438,6 +433,11 @@ if st.session_state.selected_section == "Certs & Courses":
     ### TEXT PART OF THE COURSES SECTION ###
     with main_content_courses_text_part:
         st.title("Courses")
+        st.markdown("""
+                    <div style='color: white;'>
+                    • <a href="https://udemy.com/certificate/UC-f7283a21-2186-4403-8e09-500df190aac8/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">The Ultimate Beginners Guide to Python Recommender Systems</a> - 2025/06
+                    </div>
+                    """, unsafe_allow_html=True)
         st.markdown("""
                     <div style='color: white;'>
                     • <a href="https://udemy.com/certificate/UC-f7283a21-2186-4403-8e09-500df190aac8/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff5757; font-weight: bold;">The Ultimate Beginners Guide to Python Recommender Systems</a> - 2025/06
